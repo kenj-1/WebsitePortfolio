@@ -1,0 +1,32 @@
+{
+  "id": "encantadia-turn-of-the-gems",
+  "name": "Encantadia: Turn of the Gems",
+  "type": "Game development · Console Strategy",
+  "status": "Java CLI Game",
+  "visual": "game",
+  "primaryImage": "encantadia-output-1.png",
+  "imageAlt": "Encantadia: Turn of the Gems Java console battle screen showing elemental skills, damage rolls, and cooldowns",
+  "role": "Developer / Team Member",
+  "context": "CIT–U 2nd Year Java OOP Project",
+  "summary": "A modular Java-based game integrating custom ASCII art and native file I/O structures.",
+  "description": "Encantadia: Turn of the Gems is an object-oriented Java console battle game featuring custom ASCII character art, native file I/O state handling, elemental damage ranges, and three distinct combat modes.",
+  "tags": ["Java", "OOP", "File I/O", "ASCII Art", "Modular Architecture"],
+  "bullets": [
+    "Java-based game",
+    "Integrated ASCII art",
+    "Managed file structures"
+  ],
+  "highlights": [
+    "Java-based game",
+    "Integrated ASCII art",
+    "Managed file structures"
+  ],
+  "repoUrl": "https://github.com/kenj-1/OOP-Final-Project-.git",
+  "techStackContext": "Applied foundational OOP concepts to build a modular Java game architecture, utilizing native file I/O for state handling and custom ASCII asset rendering.",
+  "galleryCaptions": {
+    "encantadia-output-1.png": "Turn-based elemental combat engine with skill cooldowns and damage calculation",
+    "encantadia-output-2.png": "Typewriter narrative prologue and interactive fate selection screen",
+    "encantadia-output-3.png": "Quest mode selector and Lair of the Sang'gres character roster",
+    "encantadia-turnofthegems-team.jpg": "Classroom presentation of Encantadia: Turn of the Gems at CIT–U"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "parangal-2025-achiever",
+  "name": "Parangal 2025 Academic Achiever",
+  "event": "CIT–U Parangal Academic Convocation",
+  "organizer": "Cebu Institute of Technology – University",
+  "date": "2025",
+  "type": "Academic Honor · Recognition",
+  "status": "Awardee",
+  "role": "BS Information Technology Scholar",
+  "context": "Cebu Institute of Technology – University · Parangal 2025",
+  "visual": "achievement",
+  "summary": "Recognized at CIT-U Parangal 2025 for outstanding academic performance in the BS Information Technology program.",
+  "description": "Conferred during the university-wide Parangal 2025 ceremony at Cebu Institute of Technology – University in recognition of sustained high academic standing alongside active student community leadership and software project work.",
+  "tags": ["Academic Excellence", "BSIT", "CIT–U", "Parangal 2025"],
+  "highlights": [
+    "Honored for exemplary grade-point standing in core programming and information technology coursework.",
+    "Balanced rigorous academic workload with active hackathon participation and student organization leadership."
+  ],
+  "techStackContext": "Demonstrated theoretical and applied mastery across object-oriented programming, data structures, algorithms, relational database management systems, and software engineering methodologies."
+}

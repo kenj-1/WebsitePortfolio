@@ -1,0 +1,32 @@
+{
+  "id": "empathtune-android",
+  "name": "EmpathTune (Android Studio)",
+  "type": "Mobile Development · Native Android",
+  "status": "Android Studio Build",
+  "visual": "music",
+  "primaryImage": "empathtune-development.png",
+  "imageAlt": "EmpathTune Android Studio native mobile application development and Spotify API integration",
+  "role": "Mobile Developer",
+  "context": "Native Android & Spotify API Integration",
+  "summary": "A native Android application featuring proper UI slicing, LLM prompting libraries, and physical phone hosting.",
+  "description": "EmpathTune (Android Studio) is a native Android mobile build integrating the Spotify API for music data, proper XML/Kotlin UI slicing, prebuilt LLM prompting libraries, and third-party device hosting for real-world usability testing.",
+  "tags": ["Android Studio", "Kotlin", "Spotify API", "LLM Prompting", "Mobile UI"],
+  "bullets": [
+    "Android phone hosting",
+    "Proper UI slicing",
+    "Utilized prebuilt libraries for LLM prompting"
+  ],
+  "highlights": [
+    "Android phone hosting",
+    "Proper UI slicing",
+    "Utilized prebuilt libraries for LLM prompting"
+  ],
+  "repoUrl": "https://github.com/kenj-1/EmpathTuneApplication.git",
+  "techStackContext": "Engineered a native Android application using Android Studio, integrating the Spotify API for music data and configuring third-party device hosting for real-world usability testing.",
+  "galleryCaptions": {
+    "empathtune-development.png": "Android Studio native build running on physical Samsung device with SpotifyAuthManager",
+    "empathtune-dashboard.jpg": "Mobile authentication and Spotify/Google integration screen",
+    "empathtune-login.jpg": "Mood prompt interface and real-time track player",
+    "empathtune-mobile-figma.png": "Mobile UI slicing reference and screen hierarchy in Figma"
+  }
+}

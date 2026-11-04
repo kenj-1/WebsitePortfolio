@@ -1,0 +1,32 @@
+{
+  "id": "medfinds",
+  "name": "MedFinds",
+  "type": "Healthcare & HCI Simulation",
+  "status": "Figma & HCI Prototype",
+  "visual": "document",
+  "primaryImage": "medfinds-preview (1).png",
+  "imageAlt": "MedFinds mobile healthcare interface for locating verified pharmacy medicine inventory",
+  "role": "Team Leader",
+  "context": "CIT–U Human-Computer Interaction Project",
+  "summary": "A medicine-finding simulation built with complex functional Figma components and psychological HCI principles.",
+  "description": "MedFinds is a healthcare medicine-finding simulation engineered to optimize medical accessibility through psychological human-machine interaction and complex functional Figma components.",
+  "tags": ["Figma", "HCI Principles", "UI/UX Simulation", "Medical Accessibility"],
+  "bullets": [
+    "Medicine-finding simulation",
+    "Applied psychological human-machine interaction",
+    "Built complex functional components"
+  ],
+  "highlights": [
+    "Medicine-finding simulation",
+    "Applied psychological human-machine interaction",
+    "Built complex functional components"
+  ],
+  "demoUrl": "https://www.figma.com/design/7budAr0OWWmDh5aptqSuPk/MedFinds?node-id=0-1&t=23I84adWQvFW6AtQ-1",
+  "demoLabel": "View Figma Prototype",
+  "techStackContext": "Designed complex, highly functional Figma simulations driven by strict Human-Computer Interaction (HCI) principles to optimize the user journey for medical accessibility.",
+  "galleryCaptions": {
+    "medfinds-preview (1).png": "MedFinds medicine discovery and pharmacy location preview",
+    "medfinds-frames.png": "Complete user flow wireframes and pharmacy directory views",
+    "medfinds-frames-1.png": "Prescription checkout and digital dosage confirmation screens"
+  }
+}

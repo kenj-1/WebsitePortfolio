@@ -1,0 +1,35 @@
+# Project decisions / working memory
+
+- **Purpose:** Personal brand with a near-term focus on software/IT internship applications.
+- **Visual Direction:** Clean sans-serif typography (`Inter` / system UI stack), concise factual copy, consistent spacing, and authentic project previews. Restrained glass (`backdrop-filter: blur(14px)`) is limited to the sticky navigation bar, mobile menu, and dialog backdrops; reading surfaces (`surface`, `surface-raised`) remain solid and stable.
+- **Semantic Color System (`src/styles/tokens.css`):**
+  - Built around anchors `#F0F0F0`, `#105BFF`, and `#FFC1CC`, defined once as primitives and mapped to light/dark semantic tokens exposed via Tailwind v4 `@theme inline`.
+  - Light mode: `background #F0F0F0`, `surface #FFFFFF`, `surface-raised #F7F9FF`, `foreground #151D33`, `muted-foreground #536178`, `border-subtle #D7DEEB`, `border-control #7A88A0`, `primary #105BFF`, `primary-hover #0049DB`, `primary-foreground #FFFFFF`, `link #105BFF`, `accent #FFC1CC`, `accent-foreground #562633`, `focus-ring #105BFF`, `skeleton-base #DCE2ED`, `skeleton-highlight #EAF0FA`, `success #126B49`, `warning #8A5700`, `danger #B4233B`.
+  - Dark mode: `background #0B1020`, `surface #121B30`, `surface-raised #1B2740`, `foreground #F0F0F0`, `muted-foreground #A9B6CF`, `border-subtle #293851`, `border-control #647795`, `primary #105BFF`, `primary-hover #0049DB`, `primary-foreground #FFFFFF`, `link #8EB1FF`, `accent #FFC1CC`, `accent-foreground #562633`, `focus-ring #8EB1FF`, `skeleton-base #24314A`, `skeleton-highlight #32435F`, `success #6FE0AD`, `warning #FFD080`, `danger #FF9AAE`.
+  - Pink (`--accent`) is used as an accent surface with dark text (`--accent-foreground`, 7.64:1 contrast). Control outlines (`--border-control`) are distinct from decorative borders (`--border-subtle`) and maintain ≥ 3:1 contrast against adjacent surfaces. Focus rings include a surface-colored offset ring.
+- **Theme Persistence:** Inline script in `index.html` applies saved `kenji-portfolio-theme` (`light` | `dark`) or `prefers-color-scheme` before first paint and updates `<meta name="theme-color">` (`#f0f0f0` / `#0b1020`).
+- **Genuine, Accessible Skeleton Loading (`src/Skeleton.jsx`, `src/LiveStatus.jsx`):**
+  - Rendered only for real pending media (`ProjectImage`, `ProfileCardStack` when a portrait `src` is configured, `TechCard` logos) or optional async dialog details (`project.loadDetails`). Local text renders immediately with zero artificial delays.
+  - Uses a 150ms indicator delay to avoid flash on cached assets, `aria-hidden="true"` on placeholder shapes, regional `aria-busy` cleared on terminal states (`ready`/`error`), and one persistent polite `role="status"` node (`LiveStatus`) outside busy/hidden subtrees.
+  - Shimmer runs at most 2 iterations (`150ms + 2 × 1.6s = 3.35s < 4s`) and then settles to static; reduced-motion and effects-off make it static immediately.
+- **Dramatic Aurora Mesh Gradient Background (`src/AmbientBackground.jsx`, `src/style.css`):**
+  - Background container `.aurora-mesh-bg.page-backdrop` covers the entire document body as a fixed background layer (`position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; overflow: hidden; background-color: #02030a;`).
+  - Uses 5 large, soft, overlapping aurora color nodes (`--cyan`, `--violet`, `--magenta`, `--teal`, `--indigo`) in deep space blacks, electric cyans, rich violets, and neon magentas that slowly drift, scale, and warp across a non-linear grid (`auroraDrift1`–`auroraDrift5` over 20s–28s cycles) with `will-change: transform`.
+  - Complete removal of prior starfield, lava lamp, and diagonal gradient code.
+  - Persists continuously across all scrolling sections without clipping; all section divider lines remain `0px` for a natural, borderless flow.
+  - Pauses cleanly when `prefers-reduced-motion: reduce` or `[data-effects='off']` is active.
+- **Dynamic File Scanning & 'Hackathons & Competitions' Section (`vite.config.js`, `src/assetScanner.js`, `src/main.jsx`):**
+  - Scans `assets/hackathons`, `assets/achievements`, and `assets/projects` to extract images, JSON metadata, and Markdown files into `virtual:portfolio-assets`.
+  - Maps `assets/hackathons` (`oltek-hackathon`, `regional-nagacity-hackathon`) and `assets/achievements` (`parangal-2025-achiever`, `deans-lister-2025-2026`) into interactive 3D `TiltCard` contest cards in `#hackathons` with an interactive multi-image gallery inside `ProjectDialog`.
+- **Projects & Right-Sized Media (`src/content.js`, `src/assets/`):**
+  - Retains EmpathTune (`visual: 'music'`, Role: Project Manager / Product Owner), ExcelLent (cropped responsive 640w/1280w WebP from `assets/hackathons/oltek-hackathon/excellent-frontend.png`), and Encantadia (responsive 640w/1280w WebP from `assets/projects/encantadia-echoes-of-the-gems/encantadia-output-3.jpeg`).
+  - Tech stack logos are right-sized to 144px WebP in `src/assets/tech/` (reducing logo payload from 393 KB to 56 KB). Python and Spring Boot intentionally retain `logo: null` initial fallbacks (`P`, `SB`).
+- **Technical Journey (`src/TechJourney.jsx`, `src/TechCard.jsx`, `src/TechDetails.jsx`):**
+  - Preserves 2024 (C), 2025 (Java, HTML, CSS, JavaScript, Tailwind CSS, Figma), and 2026 (Python, React, SQL, Supabase, Spring Boot).
+  - Summaries are visible on cards without requiring hover; clicking/tapping/pressing Enter or Space opens the `TechDetails` modal with focus trapping and focus restoration.
+
+- **3D Tilt + Glare Cards (`src/TiltCard.jsx`, `src/useProjectCardMotion.js`, `src/style.css` "TiltCard" block, tokens `--tilt-*`):**
+  - `TiltCard` wraps every project card: `perspective: 1000px`, `preserve-3d`, children marked `tilt-depth` / `tilt-depth--near` move in Z with hover engagement, a `backdrop-filter: blur(16px)` glass layer (`.tilt-card__glass`) and a specular glare (`.tilt-card__glare`) that mirrors the cursor.
+  - `backdrop-filter` lives on a separate layer because filters flatten `preserve-3d`. Glare/glass are `aria-hidden` and `pointer-events: none`; glare peak is a 10% white core so text stays ≥ 4.5:1.
+  - One rAF per card, no React state per move, cached rect invalidated on resize/scroll/ResizeObserver, listeners attached only while an `IntersectionObserver` reports the card within 80 px of the viewport. Max 3° tilt, 3 px lift; off for reduced motion, coarse pointers, hidden tabs, effects-off and keyboard focus.
+  - There is no agent terminal / playground / WebSocket code in this repository, so none was wrapped. Wrap one later with `<TiltCard as="section" …>`; tilt pauses while an input inside has keyboard focus.

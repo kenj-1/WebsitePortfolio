@@ -1,0 +1,23 @@
+{
+  "id": "empathtune-web",
+  "name": "EmpathTune (Web Development)",
+  "type": "Fullstack Web · Music & NLP",
+  "status": "in-development",
+  "visual": "music",
+  "primaryImage": "empathtune-login.jpg",
+  "imageAlt": "EmpathTune Web application featuring NLP mood prompts, Supabase database, and Google OAuth",
+  "role": "Fullstack Developer",
+  "context": "Fullstack Web Transition · Supabase & OAuth",
+  "summary": "Fullstack web platform utilizing NLP prompts to foster human connection through shared music taste.",
+  "description": "EmpathTune (Web Development) transitions the EmpathTune experience to the web, combining Supabase backend database management, Google OAuth authentication, and NLP API integrations to connect people via music taste.",
+  "tags": ["Supabase", "Google OAuth", "NLP API", "Fullstack Web", "Django / Python"],
+  "bullets": [
+    "Web transition",
+    "NLP prompts for human connection via music taste"
+  ],
+  "highlights": [
+    "Web transition",
+    "NLP prompts for human connection via music taste"
+  ],
+  "techStackContext": "Architected a secure web application utilizing Supabase for backend database management and integrated Google OAuth for secure, seamless user authentication. Leveraged NLP API integrations to simulate human connection."
+}

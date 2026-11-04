@@ -1,0 +1,231 @@
+/*
+ * Design tokens — edit colours, spacing, radii, shadows, motion and glass here.
+ * 1. Primitives are raw values, defined once.
+ * 2. Semantic tokens map primitives to roles per theme; components use only these.
+ * 3. `@theme inline` exposes the semantic tokens to Tailwind utilities (bg-surface, text-muted-foreground…).
+ */
+
+/* 1. Primitives ----------------------------------------------------------- */
+:root {
+  --white: #ffffff;
+  --gray-50: #f7f9ff;
+  --gray-100: #f0f0f0;
+  --gray-150: #eaf0fa;
+  --gray-200: #dce2ed;
+  --gray-250: #d7deeb;
+  --gray-500: #7a88a0;
+  --gray-600: #536178;
+  --gray-900: #151d33;
+
+  --navy-300: #a9b6cf;
+  --navy-500: #647795;
+  --navy-600: #32435f;
+  --navy-700: #293851;
+  --navy-750: #24314a;
+  --navy-800: #1b2740;
+  --navy-900: #121b30;
+  --navy-950: #02030a;
+
+  --blue-300: #8eb1ff;
+  --blue-600: #105bff;
+  --blue-700: #0049db;
+
+  --pink-200: #ffc1cc;
+  --pink-900: #562633;
+
+  --green-300: #6fe0ad;
+  --green-700: #126b49;
+  --amber-200: #ffd080;
+  --amber-700: #8a5700;
+  --red-300: #ff9aae;
+  --red-700: #b4233b;
+
+  /* Spacing (rem so it follows the visitor's text size) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --section-space: clamp(6rem, 5rem + 5vw, 10rem);
+  --container: 74rem;
+  --gutter: clamp(1.25rem, 1rem + 2vw, 3rem);
+
+  /* Radii */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-full: 999px;
+
+  /* Typography System Overhaul */
+  --font-display: 'Citadel', 'Cinzel', 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Helvetica', 'Helvetica Neue', Arial, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-accent: 'Soft Light', 'Fraunces', 'Italiana', 'Cormorant Garamond', Georgia, serif;
+  --font-sans-stack: var(--font-body);
+  --font-mono-stack: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Motion: short functional transitions (140–240 ms). */
+  --duration-fast: 140ms;
+  --duration-base: 180ms;
+  --duration-slow: 240ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --skeleton-delay: 150ms;
+  --skeleton-shimmer-duration: 1.6s;
+  --skeleton-shimmer-count: 2; /* 150 ms + 2 × 1.6 s settles before 4 s */
+
+  /* Glass (navigation, menus and dialog backdrops only) */
+  --glass-blur: 14px;
+  --glass-opacity: 82%;
+  --backdrop-blur: 4px;
+
+  /* Project-card hover limits */
+  --card-lift: 3px;
+
+  /* TiltCard: 3D depth, frosted glass and specular glare (see src/TiltCard.jsx) */
+  --tilt-perspective: 1000px;
+  --tilt-depth: 14px;
+  --tilt-depth-near: 6px;
+  --tilt-glass-blur: 16px;
+  --tilt-glass-opacity: 92%;
+}
+
+/* 2. Semantic tokens: light ------------------------------------------------ */
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+  --background: var(--gray-100);
+  --surface: var(--white);
+  --surface-raised: var(--gray-50);
+  --foreground: var(--gray-900);
+  --muted-foreground: var(--gray-600);
+  --border-subtle: var(--gray-250);
+  --border-control: var(--gray-500);
+  --primary: var(--blue-600);
+  --primary-hover: var(--blue-700);
+  --primary-foreground: var(--white);
+  --link: var(--blue-600);
+  --accent: var(--pink-200);
+  --accent-foreground: var(--pink-900);
+  --focus-ring: var(--blue-600);
+  --skeleton-base: var(--gray-200);
+  --skeleton-highlight: var(--gray-150);
+  --success: var(--green-700);
+  --warning: var(--amber-700);
+  --danger: var(--red-700);
+
+  --glass-surface: color-mix(in srgb, var(--surface) var(--glass-opacity), transparent);
+  --overlay-backdrop: color-mix(in srgb, var(--gray-900) 55%, transparent);
+  --shadow-sm: 0 1px 2px rgb(21 29 51 / 0.06), 0 1px 1px rgb(21 29 51 / 0.04);
+  --shadow-md: 0 8px 24px rgb(21 29 51 / 0.08), 0 2px 6px rgb(21 29 51 / 0.05);
+  --shadow-lg: 0 24px 64px rgb(21 29 51 / 0.18), 0 4px 16px rgb(21 29 51 / 0.08);
+  --card-glow: 0 10px 30px -12px color-mix(in srgb, var(--primary) 38%, transparent), 0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent);
+
+  /* Hero: static gradient (always painted) and fluid palette (canvas) */
+  --page-gradient:
+    radial-gradient(60rem 32rem at 85% -10%, color-mix(in srgb, var(--primary) 16%, transparent), transparent 70%),
+    radial-gradient(40rem 26rem at 5% 105%, color-mix(in srgb, var(--accent) 45%, transparent), transparent 70%),
+    var(--background);
+  /* Uniform scrim over the full-page fluid: keeps text/background contrast ≥ 4.5:1 at peak fluid intensity. */
+  --page-scrim: color-mix(in srgb, var(--background) 78%, transparent);
+  --fluid-low: var(--blue-300);
+  --fluid-mid: var(--blue-600);
+  --fluid-high: var(--pink-200);
+  --fluid-opacity: 0.42;
+  /* Glare stays low-alpha so it cannot reduce text contrast below 4.5:1 (peak white 10%). */
+  --tilt-glare-core: rgb(255 255 255 / 0.1);
+  --tilt-glare-halo: color-mix(in srgb, var(--accent) 22%, transparent);
+  --placeholder-well: linear-gradient(160deg, var(--gray-150), color-mix(in srgb, var(--accent) 40%, var(--surface)));
+  --placeholder-figure: color-mix(in srgb, var(--primary) 18%, var(--surface-raised));
+}
+
+/* 2b. Semantic tokens: dark ------------------------------------------------ */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --background: var(--navy-950);
+  --surface: var(--navy-900);
+  --surface-raised: var(--navy-800);
+  --foreground: var(--gray-100);
+  --muted-foreground: var(--navy-300);
+  --border-subtle: var(--navy-700);
+  --border-control: var(--navy-500);
+  --primary: var(--blue-600);
+  --primary-hover: var(--blue-700);
+  --primary-foreground: var(--white);
+  --link: var(--blue-300);
+  --accent: var(--pink-200);
+  --accent-foreground: var(--pink-900);
+  --focus-ring: var(--blue-300);
+  --skeleton-base: var(--navy-750);
+  --skeleton-highlight: var(--navy-600);
+  --success: var(--green-300);
+  --warning: var(--amber-200);
+  --danger: var(--red-300);
+
+  --overlay-backdrop: color-mix(in srgb, var(--navy-950) 72%, transparent);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-md: 0 10px 28px rgb(0 0 0 / 0.32), 0 2px 6px rgb(0 0 0 / 0.2);
+  --shadow-lg: 0 28px 72px rgb(0 0 0 / 0.5), 0 4px 16px rgb(0 0 0 / 0.3);
+  --card-glow: 0 12px 34px -14px color-mix(in srgb, var(--primary) 70%, transparent), 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
+
+  --page-gradient:
+    radial-gradient(60rem 32rem at 85% -10%, color-mix(in srgb, var(--primary) 30%, transparent), transparent 70%),
+    radial-gradient(40rem 26rem at 5% 105%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%),
+    var(--background);
+  --page-scrim: color-mix(in srgb, #060814 24%, transparent);
+  --fluid-low: var(--navy-600);
+  --fluid-mid: var(--blue-600);
+  --fluid-high: var(--pink-200);
+  --fluid-opacity: 0.5;
+  --tilt-glare-core: rgb(255 255 255 / 0.1);
+  --tilt-glare-halo: color-mix(in srgb, var(--link) 16%, transparent);
+  --placeholder-well: linear-gradient(160deg, var(--navy-800), color-mix(in srgb, var(--primary) 28%, var(--navy-900)));
+  --placeholder-figure: color-mix(in srgb, var(--blue-300) 22%, var(--navy-800));
+}
+
+/* 3. Tailwind bridge ------------------------------------------------------- */
+@theme {
+  --color-*: initial; /* Only semantic colours below are available as utilities. */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-control: var(--border-control);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-link: var(--link);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-focus-ring: var(--focus-ring);
+  --color-skeleton-base: var(--skeleton-base);
+  --color-skeleton-highlight: var(--skeleton-highlight);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-sans: var(--font-sans-stack);
+  --font-mono: var(--font-mono-stack);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --ease-out: var(--ease-out);
+}
+

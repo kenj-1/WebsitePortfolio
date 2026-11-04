@@ -1,0 +1,34 @@
+{
+  "id": "oltek-hackathon",
+  "name": "ExcelLent — Logistics Automation Challenge",
+  "event": "From Paper to Data: Logistics Automation Challenge",
+  "organizer": "Oltek Solutions Corp.",
+  "date": "March 23, 2026",
+  "type": "Hackathon · Logistics Automation",
+  "status": "Certificate of Participation",
+  "team": "Team Commit-Mint",
+  "role": "Full-Stack & Document Pipeline Builder",
+  "context": "Oltek Solutions Corp. Hackathon · March 2026",
+  "primaryImage": "excellent-frontend.png",
+  "imageAlt": "ExcelLent web interface converting PDF, Word, CSV, and TXT logistics files into structured Excel spreadsheets",
+  "summary": "Local-first document extraction pipeline turning complex shipping contracts and PDFs into structured multi-sheet Excel workbooks.",
+  "description": "Built during the 'From Paper to Data: Logistics Automation Challenge' organized by Oltek Solutions Corp. ExcelLent automates the extraction of multi-thousand-row freight contracts, trade lanes, and container rate tables from unstructured PDF, DOCX, CSV, and TXT documents into formatted Excel reports.",
+  "tags": ["Django REST", "Python", "Next.js", "Data Extraction", "Excel Automation"],
+  "bullets": [
+    "Mastered data parsing",
+    "Implemented technical Python workflows",
+    "Extracted 2,172+ structured trade-lane and container tariff rows from complex freight PDF contracts"
+  ],
+  "highlights": [
+    "Mastered data parsing.",
+    "Implemented technical Python workflows.",
+    "Extracted 2,172+ structured trade-lane and container tariff rows from complex freight PDF contracts into formatted .xlsx reports."
+  ],
+  "repoUrl": "https://github.com/kenj-1/Oltek.git",
+  "techStackContext": "Engineered backend solutions utilizing advanced Python architectures. Implemented robust data parsing algorithms and structured technical workflows to optimize data processing.",
+  "galleryCaptions": {
+    "excellent-frontend.png": "ExcelLent conversion suite for PDF, Word, CSV, and TXT to Excel",
+    "excellent-output.png": "Extracted 2,172-row freight contract report in Excel (ATL0347N25-Contract)",
+    "oltek-hackathon-pic.jpg": "Team Commit-Mint with Certificates of Participation at the Oltek Logistics Automation Challenge"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "encantadia-echoes-of-the-gems",
+  "name": "Encantadia: Echoes of the Gems",
+  "type": "Game development · 2D Fighting & RPG",
+  "status": "Java Swing & JDBC",
+  "visual": "game",
+  "primaryImage": "encantadia-output-3.jpeg",
+  "imageAlt": "Encantadia: Echoes of the Gems Java Swing pixel-art battle screen and Tower of Trials interface",
+  "role": "Team Leader",
+  "context": "Academic Object-Oriented Programming Project",
+  "summary": "An interactive Java Swing fighting game built with strict OOP principles and JDBC state management.",
+  "description": "Encantadia: Echoes of the Gems is an interactive fighting game featuring custom Java Swing screens, elemental Sang'gre abilities, a 7-tier Tower of Trials gauntlet, and JDBC-backed state persistence.",
+  "tags": ["Java", "Java Swing", "JDBC", "OOP", "State Management"],
+  "bullets": [
+    "Interactive fighting game",
+    "Applied OOP concepts",
+    "Built Java Swing screens"
+  ],
+  "highlights": [
+    "Interactive fighting game",
+    "Applied OOP concepts",
+    "Built Java Swing screens"
+  ],
+  "repoUrl": "https://github.com/kenj-1/OOP2JAVAGAMEPROJECT.git",
+  "techStackContext": "Utilized Java Database Connectivity (JDBC) for robust state management and Java Swing for GUI rendering. Led the team in structuring complex game logic using strict Object-Oriented Programming (OOP) principles.",
+  "galleryCaptions": {
+    "encantadia-output-3.jpeg": "Turn-based graphical battle arena with elemental skill controls",
+    "encantadia-output-1.jpeg": "Encantadia: Echoes of the Gems main title screen",
+    "encantadia-output-2.jpeg": "Tower of Trials 7-warrior progression ladder",
+    "encantadia-team.png": "Development team: Mary Claire Lauron, Dirk Kenji Balili, Tyrone Pascual, and Elan Sheremak Baul"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "regional-nagacity-hackathon",
+  "name": "Nagaalaga",
+  "event": "Regional Naga City Hackathon",
+  "organizer": "Naga City Civic & Health Innovation",
+  "date": "2026",
+  "type": "Hackathon / Contest · Civic HealthTech",
+  "status": "Semi-Finalist",
+  "team": "CIT–U Student Builders",
+  "role": "Data Analyst",
+  "context": "Regional Naga City Hackathon · Semi-Finalist",
+  "primaryImage": "nagaalaga-website.png",
+  "imageAlt": "Nagaalaga maternal health web portal welcoming mothers and connecting barangay health centers",
+  "summary": "Civic maternal health platform that reached the Semi-Finals through rigorous quality control and app performance tracking.",
+  "description": "Developed for the Regional Naga City Hackathon, Nagaalaga is a web and mobile maternal health platform connecting barangay mothers with health centers and obstetricians, backed by structured quality control and performance telemetry.",
+  "tags": ["Data Analysis", "Quality Control", "Performance Tracking", "Civic HealthTech", "Semi-Finalist"],
+  "bullets": [
+    "Reached Semi-Finals",
+    "Ensured quality control",
+    "Tracked app performance data"
+  ],
+  "highlights": [
+    "Reached Semi-Finals",
+    "Ensured quality control",
+    "Tracked app performance data"
+  ],
+  "repoUrl": "https://github.com/CodeWithAdrianJames/NAGAalaga.git",
+  "techStackContext": "Led data tracking and performance documentation. Established strict quality control metrics and data records that drove the team to the semi-finals of a competitive hackathon.",
+  "galleryCaptions": {
+    "nagaalaga-website.png": "Nagaalaga web portal landing page — 'Your Partner in Maternal Health'",
+    "nagaalaga-output.png": "Bicol Access Health Centrum obstetrician directory and consultation status dashboard",
+    "nagaalaga-mobile.png": "Mobile-first barangay maternal care onboarding interface",
+    "nagaalaga-team.jpg": "CIT–U Nagaalaga hackathon team at Cebu Institute of Technology – University"
+  }
+}

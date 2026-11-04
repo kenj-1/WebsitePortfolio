@@ -1,0 +1,20 @@
+{
+  "id": "deans-lister-2025-2026",
+  "name": "Dean's Lister (2025-2026)",
+  "event": "College of Computer Studies Dean’s List",
+  "organizer": "CIT–U College of Computer Studies",
+  "date": "AY 2025–2026",
+  "type": "Academic Distinction · CCS",
+  "status": "Dean's List",
+  "role": "BS Information Technology Student",
+  "context": "College of Computer Studies · AY 2025–2026",
+  "visual": "achievement",
+  "summary": "Named to the College of Computer Studies Dean's List for consistent distinction in coursework.",
+  "description": "Achieved Dean's Lister standing for Academic Year 2025–2026 in the College of Computer Studies at CIT–U while leading technical projects, competing in regional hackathons, and serving in student tech organizations.",
+  "tags": ["Dean's List", "College of Computer Studies", "OOP & Systems", "AY 2025–2026"],
+  "highlights": [
+    "Maintained top-tier academic standing across Java OOP, relational databases, and web application development subjects.",
+    "Applied classroom software engineering principles directly to hackathon prototypes and academic games."
+  ],
+  "techStackContext": "Sustained top academic marks across rigorous technical coursework including Java, Spring Boot, MySQL, full-stack web development frameworks, and systems integration."
+}
