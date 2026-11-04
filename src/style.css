@@ -1543,7 +1543,7 @@ button {
   transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   background: radial-gradient(
     600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(217, 119, 87, 0.14),
+    rgba(217, 119, 87, 0.12),
     transparent 40%
   );
 }
@@ -1725,10 +1725,8 @@ button {
 }
 
 /* Deep internal parallax rules: transform-style & translateZ on hover/tilt */
-.tilt-card__tilt {
-  transform-style: preserve-3d;
-}
-
+.project-card,
+.tilt-card__tilt,
 .project-card__surface {
   transform-style: preserve-3d;
 }
@@ -1736,9 +1734,11 @@ button {
 .project-card .project-visual-frame,
 .project-card .project-image-button,
 .project-card .project-visual {
-  transform: translateZ(28px);
+  transform: translateZ(40px);
   transform-style: preserve-3d;
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
 }
 
 .project-card:hover .project-visual-frame,
@@ -1747,7 +1747,7 @@ button {
 .project-card[data-tilting="true"] .project-visual-frame,
 .project-card[data-tilting="true"] .project-image-button,
 .project-card[data-tilting="true"] .project-visual {
-  transform: translateZ(55px);
+  transform: translateZ(60px);
 }
 
 .project-card .project-body,
@@ -1761,19 +1761,19 @@ button {
 }
 
 .project-card .project-title-row {
-  transform: translateZ(20px);
+  transform: translateZ(40px);
   transform-style: preserve-3d;
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .project-card:hover .project-title-row,
 .project-card[data-tilting="true"] .project-title-row {
-  transform: translateZ(42px);
+  transform: translateZ(48px);
 }
 
 .project-card .project-meta,
 .project-card .tag-row {
-  transform: translateZ(14px);
+  transform: translateZ(40px);
   transform-style: preserve-3d;
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1782,21 +1782,24 @@ button {
 .project-card:hover .tag-row,
 .project-card[data-tilting="true"] .project-meta,
 .project-card[data-tilting="true"] .tag-row {
-  transform: translateZ(32px);
+  transform: translateZ(44px);
 }
 
 .project-card .project-card-actions,
+.project-card .tech-context-toggle,
 .project-card .tech-context-action-wrap {
-  transform: translateZ(22px);
+  transform: translateZ(40px);
   transform-style: preserve-3d;
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .project-card:hover .project-card-actions,
+.project-card:hover .tech-context-toggle,
 .project-card:hover .tech-context-action-wrap,
 .project-card[data-tilting="true"] .project-card-actions,
+.project-card[data-tilting="true"] .tech-context-toggle,
 .project-card[data-tilting="true"] .tech-context-action-wrap {
-  transform: translateZ(46px);
+  transform: translateZ(50px);
 }
 
 .featured .project-body {
@@ -2234,21 +2237,34 @@ button[disabled].tech-drawer-btn {
   opacity: 1;
 }
 
-.project-card .achievement-emblem__logo,
-.achievement-emblem__logo {
-  width: 52px !important;
-  height: 52px !important;
-  max-width: 52px !important;
-  max-height: 52px !important;
-  object-fit: contain !important;
-  border-radius: var(--radius-sm, 6px) !important;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
-}
-
-.project-card .achievement-emblem {
+.project-card .achievement-emblem,
+.achievement-emblem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50% !important;
+  border: 1.5px solid rgba(217, 119, 87, 0.4);
+  background: rgba(7, 24, 46, 0.85);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    0 0 16px rgba(217, 119, 87, 0.2);
+  margin-bottom: 0.5rem;
+  overflow: hidden;
   transform: translateZ(28px);
   transform-style: preserve-3d;
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card .achievement-emblem__logo,
+.achievement-emblem__logo {
+  width: 48px !important;
+  height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
 }
 
 .project-card:hover .achievement-emblem,
@@ -3052,36 +3068,64 @@ button[disabled].tech-drawer-btn {
   min-width: 0;
 }
 
-.leadership-card {
+.leadership-card,
+.leadership-card.tilt-card {
   position: relative;
   width: 100%;
-  border-radius: var(--radius-xl);
-  border: 1px solid rgba(142, 177, 255, 0.22);
-  background: rgba(13, 20, 38, 0.58);
+  border-radius: 24px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.leadership-card__surface,
+.uiverse-3d-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  background: #07182e;
+  background: color-mix(in srgb, #07182e 88%, transparent);
+  border: none;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.5);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   padding: var(--space-6);
-  box-shadow: 0 12px 32px rgba(2, 6, 23, 0.35);
   display: flex;
   flex-direction: column;
-  transition:
-    border-color var(--duration-fast) var(--ease-standard),
-    box-shadow var(--duration-fast) var(--ease-standard),
-    transform var(--duration-fast) var(--ease-out);
+  transform-style: preserve-3d;
+  overflow: hidden;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease;
 }
 
-.leadership-card:hover {
-  border-color: rgba(142, 177, 255, 0.55);
-  box-shadow:
-    0 16px 40px rgba(80, 120, 255, 0.2),
-    0 0 20px rgba(80, 120, 255, 0.12);
-  transform: translateY(-3px);
+/* Mouse-tracking flashlight glow on leadership card */
+.leadership-card__surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(217, 119, 87, 0.12),
+    transparent 40%
+  );
 }
 
-:root[data-theme='light'] .leadership-card {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+.leadership-card:hover .leadership-card__surface::before,
+.leadership-card[data-tilting="true"] .leadership-card__surface::before {
+  opacity: 1;
+}
+
+:root[data-theme='light'] .leadership-card__surface {
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 16px 36px rgba(15, 23, 42, 0.1);
 }
 
 .leadership-card__header {
@@ -3089,6 +3133,14 @@ button[disabled].tech-drawer-btn {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  transform: translateZ(24px);
+  transform-style: preserve-3d;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.leadership-card:hover .leadership-card__header,
+.leadership-card[data-tilting="true"] .leadership-card__header {
+  transform: translateZ(40px);
 }
 
 .leadership-card__meta-row {
@@ -3102,14 +3154,15 @@ button[disabled].tech-drawer-btn {
 .leadership-card__badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.2rem 0.625rem;
+  padding: 0.22rem 0.7rem;
   border-radius: var(--radius-full);
-  background-color: var(--accent);
-  color: var(--accent-foreground);
+  background: rgba(217, 119, 87, 0.16);
+  color: #f5cbb8;
+  border: 1px solid rgba(217, 119, 87, 0.35);
   font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -3121,28 +3174,45 @@ button[disabled].tech-drawer-btn {
   letter-spacing: 0.04em;
 }
 
+/* Uiverse Typography Hierarchy */
 .leadership-card__role {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 1.25rem;
+  margin: 0.25rem 0 0.15rem;
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.35rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--foreground);
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+  transform: translateZ(20px);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.leadership-card:hover .leadership-card__role,
+.leadership-card[data-tilting="true"] .leadership-card__role {
+  transform: translateZ(45px);
 }
 
 .leadership-card__title {
-  margin: 0.15rem 0 0;
+  margin: 0 0 0.2rem;
   font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--link);
+  color: #d97757;
+  letter-spacing: 0.02em;
+  transform: translateZ(16px);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.leadership-card:hover .leadership-card__title,
+.leadership-card[data-tilting="true"] .leadership-card__title {
+  transform: translateZ(36px);
 }
 
 .leadership-card__org {
   font-family: var(--font-body);
   font-size: 0.8125rem;
-  color: var(--muted-foreground);
+  color: rgba(255, 255, 255, 0.65);
   font-weight: 500;
 }
 
@@ -3155,6 +3225,14 @@ button[disabled].tech-drawer-btn {
   font-size: 0.875rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.78);
+  transform: translateZ(16px);
+  transform-style: preserve-3d;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.leadership-card:hover .leadership-card__bullets,
+.leadership-card[data-tilting="true"] .leadership-card__bullets {
+  transform: translateZ(30px);
 }
 
 :root[data-theme='light'] .leadership-card__bullets {
@@ -3162,7 +3240,7 @@ button[disabled].tech-drawer-btn {
 }
 
 .leadership-card__bullets li::marker {
-  color: var(--link);
+  color: #d97757;
 }
 
 @media (max-width: 840px) {
@@ -4010,13 +4088,14 @@ button[disabled].tech-drawer-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 4.25rem;
-  height: 4.25rem;
-  border-radius: var(--radius-lg);
-  border: 1px solid color-mix(in srgb, var(--primary) 42%, var(--border-subtle));
-  background: color-mix(in srgb, var(--primary) 16%, var(--surface));
-  color: var(--link);
-  box-shadow: 0 10px 24px -8px color-mix(in srgb, var(--primary) 45%, transparent);
+  width: 64px;
+  height: 64px;
+  border-radius: 50% !important;
+  border: 1.5px solid rgba(217, 119, 87, 0.4);
+  background: rgba(7, 24, 46, 0.85);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(217, 119, 87, 0.2);
+  margin-bottom: 0.5rem;
+  overflow: hidden;
 }
 
 .achievement-caption {
@@ -4048,10 +4127,11 @@ button[disabled].tech-drawer-btn {
 }
 
 .achievement-emblem__logo {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-  border-radius: var(--radius-sm, 6px);
+  width: 48px !important;
+  height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  object-fit: contain !important;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
 }
 
@@ -4076,6 +4156,42 @@ button[disabled].tech-drawer-btn {
   .recognitions-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Recognitions / Awards Section - Deep Navy #07182E & Brand Orange #D97757 Styling */
+.recognitions-section .project-card__surface {
+  background: #07182e;
+  background: color-mix(in srgb, #07182e 88%, transparent);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.5);
+  border: none;
+}
+
+.recognitions-section .project-status-badge {
+  background: rgba(217, 119, 87, 0.16);
+  color: #f5cbb8;
+  border: 1px solid rgba(217, 119, 87, 0.35);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.recognitions-section .project-title-row h2,
+.recognitions-section .project-title-row h3 {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.recognitions-section .visual-achievement {
+  background: radial-gradient(circle at 50% 35%, rgba(217, 119, 87, 0.18), transparent 70%), #07182e;
 }
 
 /* Interactive Multi-Artifact Gallery inside ProjectDialog */
@@ -4343,4 +4459,151 @@ button[disabled].tech-drawer-btn {
     animation: none !important;
     display: none !important;
   }
+}
+
+/* Section Micro-Labels [ 0X ] // LABEL ------------------------------------ */
+.section-micro-label {
+  display: inline-block;
+  font-family: var(--font-body, monospace);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 0.75rem;
+}
+
+:root[data-theme='light'] .section-micro-label {
+  color: rgba(15, 23, 42, 0.5);
+}
+
+/* ==========================================================================
+   Uiverse.io Card Template by bhaveshxrawat (Integrated with 3D Tilt Cards)
+   ========================================================================== */
+.card:not(.uiverse-3d-card) {
+  width: 190px;
+  height: 254px;
+  background: #07182E;
+  position: relative;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:not(.uiverse-3d-card) h2 {
+  z-index: 1;
+  color: white;
+  font-size: 2em;
+  font-family: var(--font-display, sans-serif);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+  user-select: none;
+}
+
+.card:not(.uiverse-3d-card)::before {
+  content: '';
+  position: absolute;
+  width: 100px;
+  background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+  height: 130%;
+  animation: rotBGimg 3s linear infinite;
+  transition: all 0.2s linear;
+}
+
+@keyframes rotBGimg {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card:not(.uiverse-3d-card)::after {
+  content: '';
+  position: absolute;
+  background: #07182E;
+  inset: 5px;
+  border-radius: 15px;
+}
+
+/* Integrated Uiverse + 3D Glass Card Wrapper (Leadership & Awards) */
+.card.uiverse-3d-card {
+  width: 100%;
+  height: 100%;
+  background: #07182E;
+  background: color-mix(in srgb, #07182E 88%, transparent);
+  border-radius: 24px;
+  border: none;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.5);
+  transform-style: preserve-3d;
+}
+
+.card.uiverse-3d-card h2 {
+  z-index: 2;
+  color: #ffffff;
+  font-family: var(--font-display, sans-serif);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Viscous Lava Lamp-Style Animated Background & Metaball Nodes ------------ */
+.lava-lamp-svg-filter {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.aurora-node--orange {
+  width: 54vw;
+  height: 46vh;
+  min-width: 420px;
+  min-height: 320px;
+  top: 24%;
+  left: 26%;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(217, 119, 87, 0.65) 0%,
+    rgba(234, 88, 12, 0.38) 44%,
+    rgba(124, 58, 237, 0.2) 72%,
+    transparent 86%
+  );
+  animation: auroraDrift3 25s cubic-bezier(0.37, 0, 0.63, 1) infinite alternate-reverse;
+}
+
+/* Interactive Viscous Lava Lamp Canvas ------------------------------------ */
+.liquid-physics-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.88;
+  mix-blend-mode: screen;
+  filter: blur(24px) saturate(135%);
+}
+
+:root[data-theme='light'] .liquid-physics-canvas {
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+}
+
+:root[data-effects='off'] .liquid-physics-canvas {
+  display: none !important;
 }

@@ -668,13 +668,14 @@ function ProjectCard({
     Array.isArray(project.bullets) && project.bullets.length > 0
       ? project.bullets
       : project.highlights;
+  const isRecognitionCard = project.visual === 'achievement';
 
   return (
     <TiltCard
       as="article"
       className={`project-card ${featured ? 'featured' : ''} ${detailsExpanded ? 'is-expanded' : ''}`}
       tiltClassName="project-card__tilt"
-      surfaceClassName="project-card__surface"
+      surfaceClassName={`project-card__surface ${isRecognitionCard ? 'card uiverse-3d-card' : ''}`.trim()}
       enabled={motionEnabled}
       suspended={motionSuspended}
       intensity={featured ? 1.8 : 2.5}
@@ -718,7 +719,11 @@ function ProjectCard({
           <span className="project-status-badge">{project.status}</span>
         </div>
         <div className="project-title-row">
-          <h3>{project.name}</h3>
+          {isRecognitionCard ? (
+            <h2 className="project-title">{project.name}</h2>
+          ) : (
+            <h3 className="project-title">{project.name}</h3>
+          )}
           <button
             type="button"
             className="round-button"
@@ -926,6 +931,7 @@ function LeadershipSection({ items = leadershipExperiences }) {
       <div className="container">
         <div className="section-header">
           <ScrollReveal delay={0}>
+            <span className="section-micro-label">[ 04 ] // EXPERIENCE &amp; LEADERSHIP</span>
             <h2 id="leadership-title" className="section-heading">
               Experience &amp; Leadership
             </h2>
@@ -944,8 +950,16 @@ function LeadershipSection({ items = leadershipExperiences }) {
               delay={0.25 + index * 0.07}
               className="leadership-grid__item"
             >
-              <article className="leadership-card">
-                <div className="leadership-card__header">
+              <TiltCard
+                as="article"
+                className="leadership-card"
+                tiltClassName="leadership-card__tilt"
+                surfaceClassName="leadership-card__surface card uiverse-3d-card"
+                enabled={true}
+                intensity={2.2}
+                lift={3}
+              >
+                <div className="leadership-card__header tilt-depth">
                   <div className="leadership-card__meta-row">
                     {entry.orgLogo && (
                       <span className="leadership-card__logo-wrap" aria-hidden="true">
@@ -955,16 +969,16 @@ function LeadershipSection({ items = leadershipExperiences }) {
                     <span className="leadership-card__badge">{entry.badge || entry.category}</span>
                     <span className="leadership-card__period">{entry.period}</span>
                   </div>
-                  <h3 className="leadership-card__role">{entry.role}</h3>
+                  <h2 className="leadership-card__role">{entry.role}</h2>
                   <h4 className="leadership-card__title">{entry.title}</h4>
                   <span className="leadership-card__org">{entry.organization}</span>
                 </div>
-                <ul className="leadership-card__bullets">
+                <ul className="leadership-card__bullets tilt-depth">
                   {entry.bullets.map((b, i) => (
                     <li key={i}>{b}</li>
                   ))}
                 </ul>
-              </article>
+              </TiltCard>
             </ScrollReveal>
           ))}
         </div>
@@ -991,6 +1005,7 @@ function RecognitionsSection({
       <div className="container">
         <div className="section-header">
           <ScrollReveal delay={0}>
+            <span className="section-micro-label">[ 05 ] // AWARDS</span>
             <h2 id="recognitions-title" className="section-heading">
               Awards &amp; Recognitions
             </h2>

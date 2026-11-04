@@ -95,7 +95,7 @@ export const academicAwards = [
     role: 'BS Information Technology Student',
     context: 'College of Computer Studies · AY 2025–2026',
     visual: 'achievement',
-    orgLogo: cituLogo,
+    orgLogo: honorSocietyLogo,
     summary:
       "Named to the College of Computer Studies Dean's List for consistent distinction in coursework.",
     description:
@@ -124,7 +124,7 @@ export const academicAwards = [
     role: 'BS Information Technology Student',
     context: 'College of Computer Studies · 1st & 2nd Semester',
     visual: 'achievement',
-    orgLogo: cituLogo,
+    orgLogo: cssOrgLogo,
     summary:
       'Awarded Honor Roll status for Academic Year 2025-2026 (1st and 2nd Semester).',
     description:
