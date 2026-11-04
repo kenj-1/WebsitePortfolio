@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import useProjectCardMotion from './useProjectCardMotion';
 
 /**
@@ -29,19 +30,40 @@ export default function TiltCard({
   surfaceClassName = '',
   enabled = true,
   suspended = false,
-  intensity = 2.5,
-  lift = 3,
+  intensity = 3,
+  lift = 4,
   glare = true,
   glass = true,
   children,
+  onMouseMove,
   ...rest
 }) {
   const { cardRef, surfaceRef } = useProjectCardMotion({ enabled, suspended, intensity, lift });
+
+  const handleMouseMove = useCallback(
+    e => {
+      const card = cardRef.current;
+      if (card) {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x.toFixed(1)}px`);
+        card.style.setProperty('--mouse-y', `${y.toFixed(1)}px`);
+        if (surfaceRef.current) {
+          surfaceRef.current.style.setProperty('--mouse-x', `${x.toFixed(1)}px`);
+          surfaceRef.current.style.setProperty('--mouse-y', `${y.toFixed(1)}px`);
+        }
+      }
+      onMouseMove?.(e);
+    },
+    [onMouseMove, cardRef, surfaceRef],
+  );
 
   return (
     <Tag
       {...rest}
       ref={cardRef}
+      onMouseMove={handleMouseMove}
       className={`tilt-card ${glass ? 'tilt-card--glass' : ''} ${className}`.replace(/\s+/g, ' ').trim()}
       data-motion-enabled={String(enabled)}
       data-motion-suspended={String(suspended)}

@@ -207,6 +207,13 @@ export default function useProjectCardMotion({
       motion.needsMeasure = true;
       motion.pointerX = event.clientX;
       motion.pointerY = event.clientY;
+      const rect = card.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x.toFixed(1)}px`);
+      card.style.setProperty('--mouse-y', `${y.toFixed(1)}px`);
+      surface.style.setProperty('--mouse-x', `${x.toFixed(1)}px`);
+      surface.style.setProperty('--mouse-y', `${y.toFixed(1)}px`);
       schedule();
     };
 
@@ -215,6 +222,14 @@ export default function useProjectCardMotion({
       motion.pointerInside = true;
       motion.pointerX = event.clientX;
       motion.pointerY = event.clientY;
+      if (motion.rect) {
+        const x = event.clientX - motion.rect.left;
+        const y = event.clientY - motion.rect.top;
+        card.style.setProperty('--mouse-x', `${x.toFixed(1)}px`);
+        card.style.setProperty('--mouse-y', `${y.toFixed(1)}px`);
+        surface.style.setProperty('--mouse-x', `${x.toFixed(1)}px`);
+        surface.style.setProperty('--mouse-y', `${y.toFixed(1)}px`);
+      }
       schedule();
     };
 

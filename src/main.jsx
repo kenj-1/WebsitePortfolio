@@ -36,6 +36,8 @@ import LiveStatus from './LiveStatus';
 import AmbientBackground from './AmbientBackground';
 import AmbientEffectsToggle from './AmbientEffectsToggle';
 import AboutMeGallery from './AboutMeGallery';
+import TiltCard from './TiltCard';
+import LiquidLogo3D from './LiquidLogo3D';
 import { ScrollReveal } from './ScrollReveal';
 import './style.css';
 
@@ -167,7 +169,7 @@ function Header({ theme, onThemeToggle, ambientEnabled, onAmbientToggle }) {
   );
 }
 
-function Hero() {
+function Hero({ theme, effectsEnabled = true, modalOpen = false }) {
   return (
     <section className="hero-section hero-eclipse" aria-labelledby="hero-title">
       {/* The Glowing Arc */}
@@ -175,29 +177,49 @@ function Hero() {
 
       <div className="hero-eclipse-inner container">
         <ScrollReveal delay={0}>
-          <p className="hero-producer-label">
+          <p className="internship-note">
             <span className="status-dot" aria-hidden="true" />
-            <span>A Kenji Balili Production</span>
+            <span>Open to internship opportunities</span>
           </p>
         </ScrollReveal>
 
         {/* Main Title in Citadel Architectural Display Font */}
         <ScrollReveal delay={0.12}>
           <h1 id="hero-title" className="hero-headline-eclipse">
-            Website Portfolio
+            KENJI<br />BALILI
           </h1>
         </ScrollReveal>
 
         {/* Core Role & Soft Light Editorial Accent */}
-        <ScrollReveal delay={0.22}>
+        <ScrollReveal delay={0.2}>
           <div className="hero-role-display">
             <span className="hero-core-role">SOFTWARE DEVELOPER &amp; PRODUCT BUILDER</span>
             <span className="hero-accent-text">Crafting intelligent interfaces &amp; scalable digital systems</span>
           </div>
         </ScrollReveal>
 
+        {/* High-Contrast Resume CTA Button directly above 3D Logo */}
+        <ScrollReveal delay={0.28}>
+          <div className="hero-resume-wrap">
+            <a
+              href="/Kenji_Resume.pdf"
+              download="Kenji_Resume.pdf"
+              className="hero-resume-btn"
+              aria-label="Download Kenji Balili Resume (PDF)"
+            >
+              <Download size={15} aria-hidden="true" className="hero-resume-icon" />
+              <span>Download Resume</span>
+            </a>
+          </div>
+        </ScrollReveal>
+
+        {/* Interactive 3D Liquid Logo Component centered inside glowing arc */}
+        <ScrollReveal delay={0.34} className="hero-liquid-logo-wrap">
+          <LiquidLogo3D effectsEnabled={effectsEnabled} suspended={modalOpen} />
+        </ScrollReveal>
+
         {/* Action Buttons */}
-        <ScrollReveal delay={0.32} className="hero-actions hero-actions-centered">
+        <ScrollReveal delay={0.42} className="hero-actions hero-actions-centered">
           <a className="button button-primary" href="#work">
             View Projects <Arrow diagonal size={16} />
           </a>
@@ -648,8 +670,15 @@ function ProjectCard({
       : project.highlights;
 
   return (
-    <article
+    <TiltCard
+      as="article"
       className={`project-card ${featured ? 'featured' : ''} ${detailsExpanded ? 'is-expanded' : ''}`}
+      tiltClassName="project-card__tilt"
+      surfaceClassName="project-card__surface"
+      enabled={motionEnabled}
+      suspended={motionSuspended}
+      intensity={featured ? 1.8 : 2.5}
+      lift={featured ? 2 : 3}
     >
       {project.image ? (
         <div className="project-visual-frame tilt-depth">
@@ -784,7 +813,7 @@ function ProjectCard({
           )}
         </AnimatePresence>
       </div>
-    </article>
+    </TiltCard>
   );
 }
 
@@ -810,12 +839,12 @@ function Projects({ items = portfolioProjects, onOpen, motionEnabled, motionSusp
           {projectList.map((project, index) => (
             <ScrollReveal
               key={project.id}
-              delay={0.45 + index * 0.1}
-              className={index === 0 ? 'projects-grid__featured' : 'projects-grid__item'}
+              delay={0.25 + index * 0.08}
+              className="projects-grid__item"
             >
               <ProjectCard
                 project={project}
-                featured={index === 0}
+                featured={false}
                 onOpen={onOpen}
                 motionEnabled={motionEnabled}
                 motionSuspended={motionSuspended}
@@ -868,26 +897,23 @@ function HackathonsSection({
 
         {/* Hackathon Cards Grid */}
         <div className="projects-grid hackathons-grid">
-          {normalized.map((contest, index) => {
-            const isFeatured = index === 0;
-            return (
-              <ScrollReveal
-                key={contest.id}
-                delay={0.35 + index * 0.1}
-                className={isFeatured ? 'projects-grid__featured' : 'projects-grid__item'}
-              >
-                <ProjectCard
-                  project={contest}
-                  featured={isFeatured}
-                  onOpen={onOpen}
-                  motionEnabled={motionEnabled}
-                  motionSuspended={motionSuspended}
-                  onAnnounce={onAnnounce}
-                  ctaLabel="View hackathon details"
-                />
-              </ScrollReveal>
-            );
-          })}
+          {normalized.map((contest, index) => (
+            <ScrollReveal
+              key={contest.id}
+              delay={0.25 + index * 0.08}
+              className="projects-grid__item"
+            >
+              <ProjectCard
+                project={contest}
+                featured={false}
+                onOpen={onOpen}
+                motionEnabled={motionEnabled}
+                motionSuspended={motionSuspended}
+                onAnnounce={onAnnounce}
+                ctaLabel="View hackathon details"
+              />
+            </ScrollReveal>
+          ))}
         </div>
       </div>
     </section>
