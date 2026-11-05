@@ -81,12 +81,12 @@ export default function AmbientBackground({
       return {
         x: width * (0.12 + (idx / palette.length) * 0.76),
         y: height * (0.15 + ((idx * 37) % 70) / 100),
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (idx % 2 === 0 ? -1 : 1) * (0.25 + Math.random() * 0.35),
+        vx: (Math.random() - 0.5) * 0.44,
+        vy: (idx % 2 === 0 ? -1 : 1) * (0.32 + Math.random() * 0.44),
         baseRadius,
         radius: baseRadius,
         phase: idx * 1.15,
-        freq: 0.0007 + idx * 0.00012,
+        freq: 0.0009 + idx * 0.00015,
         color,
       };
     });
@@ -113,7 +113,8 @@ export default function AmbientBackground({
     let lastTime = performance.now();
 
     const loop = now => {
-      const dt = Math.min(32, Math.max(8, now - lastTime)) / 16.667;
+      // Scaled time delta by 1.25 (+25% speed) for slightly more active, viscous fluid motion
+      const dt = (Math.min(32, Math.max(8, now - lastTime)) / 16.667) * 1.25;
       lastTime = now;
 
       ctx.clearRect(0, 0, width, height);

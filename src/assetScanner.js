@@ -8,9 +8,33 @@ import {
   scannedSummary,
 } from 'virtual:portfolio-assets';
 import { projects as staticProjects, academicAwards as staticAcademicAwards } from './content';
+import fallbackMe1 from './assets/me/image_7ee6e6.jpg';
+import fallbackMe2 from './assets/me/image_7ee6a3.jpg';
+
+const staticMePhotos = [
+  {
+    id: 'me-photo-1',
+    fileName: 'image_7ee6e6.jpg',
+    src: fallbackMe1,
+    alt: 'Dirk Kenji Balili',
+    caption: 'Dirk Kenji Balili · Student Builder & Creator',
+    objectPosition: '50% 18%',
+  },
+  {
+    id: 'me-photo-2',
+    fileName: 'image_7ee6a3.jpg',
+    src: fallbackMe2,
+    alt: 'Dirk Kenji Balili',
+    caption: 'Student Developer · Fitting Room Mirror Selfie',
+    objectPosition: '50% 20%',
+  },
+];
 
 export const workspaceLogoUrl = discoveredLogoUrl || '/logo.png';
-export const aboutMePhotos = Array.isArray(scannedMePhotos) ? scannedMePhotos : [];
+export const aboutMePhotos =
+  Array.isArray(scannedMePhotos) && scannedMePhotos.length > 0
+    ? scannedMePhotos
+    : staticMePhotos;
 export const scannedTechStackLogos = scannedTechStack || {};
 
 function normalizeCardItem(item, index, defaultCategory = 'project') {

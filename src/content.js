@@ -13,14 +13,19 @@ import springBootLogo from './assets/tech/spring-boot.png';
 import notionLogo from './assets/tech/notion.png';
 
 import awsOrgLogo from './assets/organizations/aws-wildquacc.jpeg';
+import citSsgLogo from './assets/organizations/cit-ssg.jpeg';
 import cssOrgLogo from './assets/organizations/css.jpeg';
+import gdgocLogo from './assets/organizations/gdgoc-citu.jpeg';
 import honorSocietyLogo from './assets/organizations/honor-society.jpeg';
+import redCrossLogo from './assets/organizations/red-cross-youth.jpeg';
 import cituLogo from './assets/organizations/citu-logo.png';
 
 import excellent640 from './assets/projects/excellent-home-640.webp';
 import excellent1280 from './assets/projects/excellent-home-1280.webp';
 import encantadiaBattle640 from './assets/projects/encantadia-battle-640.webp';
 import encantadiaBattle1280 from './assets/projects/encantadia-battle-1280.webp';
+import empathtuneDashboardImg from './assets/projects/empathtune-dashboard.jpg';
+import empathtuneLoginImg from './assets/projects/empathtune-login.jpg';
 
 // Portfolio content lives here. Add a project to the array to automatically
 // create its card and details view. Keep claims, roles, and links accurate.
@@ -274,12 +279,26 @@ export const projects = [
     type: 'Fullstack Web · Music & NLP',
     status: 'in-development',
     visual: 'music',
+    image: empathtuneDashboardImg,
+    imageAlt: 'EmpathTune Web dashboard featuring music taste matching, Google OAuth, and Supabase integration',
     role: 'Fullstack Developer',
     context: 'Fullstack Web Transition · Supabase & OAuth',
     summary: 'Fullstack web platform utilizing NLP prompts to foster human connection through shared music taste.',
     description:
       'EmpathTune (Web Development) transitions the EmpathTune experience to the web, combining Supabase backend database management, Google OAuth authentication, and NLP API integrations to connect people via music taste.',
     tags: ['Supabase', 'Google OAuth', 'NLP API', 'Fullstack Web', 'Django / Python'],
+    gallery: [
+      {
+        fileName: 'empathtune-dashboard.jpg',
+        src: empathtuneDashboardImg,
+        caption: 'EmpathTune Web · Dashboard & Music Matching System',
+      },
+      {
+        fileName: 'empathtune-login.jpg',
+        src: empathtuneLoginImg,
+        caption: 'EmpathTune Web · Google OAuth & Authentication',
+      },
+    ],
     bullets: [
       'Web transition',
       'NLP prompts for human connection via music taste',
@@ -523,82 +542,87 @@ export const techJourney = [
 
 export const leadershipExperiences = [
   {
-    id: 'lead-encantadia',
-    role: 'Team Leader',
-    title: 'Encantadia: Echoes of the Gems',
-    organization: 'CIT–U Software Architecture',
-    period: '2025',
-    badge: 'OOP Architecture',
-    category: 'Academic Technical Leadership',
+    id: 'cit-ssg-pr',
+    role: 'Committee on Public Relations',
+    title: 'Supreme Student Government',
+    organization: 'CIT University - Supreme Student Government',
+    orgLogo: citSsgLogo,
+    period: 'Sep 19, 2026 — Present · 1 month',
+    badge: 'Student Government',
+    category: 'Executive Council',
     bullets: [
-      'Led core game logic structuring under strict Object-Oriented Programming (OOP) principles.',
-      'Directed Java Swing GUI state management and JDBC relational database persistence.',
-    ],
-  },
-  {
-    id: 'lead-medfinds',
-    role: 'Team Leader',
-    title: 'MedFinds',
-    organization: 'CIT–U Healthcare Innovation',
-    period: '2025 — 2026',
-    badge: 'HCI Simulation',
-    category: 'Human-Computer Interaction',
-    bullets: [
-      'Directed user-centered simulation applying psychological HCI accessibility principles.',
-      'Architected complex functional component systems and verified pharmacy locator flows in Figma.',
-    ],
-  },
-  {
-    id: 'lead-nagaalaga',
-    role: 'Data Analyst',
-    title: 'Nagaalaga Maternal Health Platform',
-    organization: 'Regional Naga City Hackathon',
-    period: '2026',
-    badge: 'Semi-Finalist',
-    category: 'Civic HealthTech Hackathon',
-    bullets: [
-      'Established quality control metrics, app performance telemetry, and test documentation.',
-      'Drove structured data verification records that propelled the team to the competition semi-finals.',
+      'Spearhead university-wide public relations initiatives and official communications for the Supreme Student Government.',
+      'Coordinate student council announcements, cross-departmental media releases, and campus public outreach.',
     ],
   },
   {
     id: 'css-pr-head',
     role: 'Committee Head',
     title: 'Committee on Public Relations',
-    organization: 'Computer Students Society · CIT–U',
+    organization: "CIT University Computer Students' Society",
     orgLogo: cssOrgLogo,
-    period: 'June 2026 — Present',
+    period: 'Jun 2026 — Present · 4 months',
     badge: 'Department Leadership',
     category: 'Student Leadership & Outreach',
     bullets: [
-      'Spearhead marketing strategy, publication deliverables, and digital communications across the student body.',
-      'Coordinate technical administration for online assemblies and manage community outreach campaigns.',
+      'Lead digital marketing strategy, technical publication deliverables, and media communications across the student body.',
+      'Direct PR campaigns for departmental general assemblies, academic seminars, and coding workshops.',
+    ],
+  },
+  {
+    id: 'gdgoc-hr-evaluator',
+    role: 'Human Resources - Member Evaluator',
+    title: 'Human Resources Division',
+    organization: 'Google Developer Groups on Campus CIT-U',
+    orgLogo: gdgocLogo,
+    period: 'Jun 2026 — Present · 4 months',
+    badge: 'Developer Community',
+    category: 'Tech Community Leadership',
+    bullets: [
+      'Conduct applicant screenings, credential evaluations, and structured onboarding for prospective student developers.',
+      'Assess member performance and facilitate collaborative technical sessions, workshops, and study jams.',
     ],
   },
   {
     id: 'aws-wildquacc-ops',
-    role: 'Assistant Department Head',
+    role: 'Assistant Operations Head',
     title: 'Operations Department',
-    organization: 'AWS Student Builder Group – Wildquacc',
+    organization: 'AWS Student Builder Group - WildQuacc',
     orgLogo: awsOrgLogo,
-    period: 'January 2026 — Present',
+    period: 'Jan 2026 — Present · 9 months',
     badge: 'Cloud Community',
     category: 'Cloud Builder Community',
     bullets: [
       'Supervise operational logistics, seminar materials, and event coordination for campus AWS builder workshops.',
+      'Streamline event scheduling, workshop venue resources, and cloud certification study cohorts.',
     ],
   },
   {
-    id: 'san-remigio-spes',
-    role: 'IT Support',
-    title: 'Municipal Records & Systems Support',
-    organization: 'Municipality of San Remigio · SPES',
-    period: 'May — June 2025',
-    badge: 'Public Sector IT',
-    category: 'Technical Operations',
+    id: 'cit-honor-society-member',
+    role: 'Committee on Member Success and Scholarships Member',
+    title: 'Member Success & Scholarships',
+    organization: 'CIT University Honor Society',
+    orgLogo: honorSocietyLogo,
+    period: 'Sep 2025 — Present · 1 year, 1 month',
+    badge: 'Academic Honor Society',
+    category: 'Scholastic Leadership',
     bullets: [
-      'Maintained and troubleshot municipal office PC hardware, reducing workstation downtime.',
-      'Handled post-election records and citizen voters’ certificates with dependable accuracy.',
+      'Support scholarship applicant evaluation, peer mentoring, and academic retention initiatives for university scholars.',
+      'Facilitate honor society development programs and student leadership excellence workshops.',
+    ],
+  },
+  {
+    id: 'red-cross-youth-cebu',
+    role: 'DRMC & TC',
+    title: 'Disaster Risk Management & Care · Training Committee',
+    organization: 'Red Cross Youth - Cebu Chapter',
+    orgLogo: redCrossLogo,
+    period: 'Active Member / Volunteer',
+    badge: 'Humanitarian Service',
+    category: 'Civic & Emergency Service',
+    bullets: [
+      'Active volunteer serving in Disaster Risk Management and Care (DRMC) and Training Committee (TC) operations.',
+      'Assist in community emergency preparedness, youth first-aid training programs, and humanitarian outreach.',
     ],
   },
 ];

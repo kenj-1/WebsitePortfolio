@@ -42,6 +42,7 @@ export default function TechJourney({
     <section className="section container tech-journey" id="skills" aria-labelledby="skills-title">
       <div className="section-header">
         <ScrollReveal delay={0}>
+          <span className="section-micro-label">[ 04 ] // JOURNEY</span>
           <h2 id="skills-title" className="section-heading">
             Technical Journey
           </h2>
@@ -57,16 +58,27 @@ export default function TechJourney({
           const yearMilestone = milestones?.[year];
           return (
             <li className="tech-journey__year" key={year}>
-              <div className="tech-journey__year-header">
+              <ScrollReveal
+                as="div"
+                delay={0.05}
+                viewport={{ once: false, margin: '0px 0px -40px 0px' }}
+                className="tech-journey__year-header"
+              >
                 <span className="tech-journey__marker" aria-hidden="true" />
                 <h3 className="tech-journey__year-label">{year}</h3>
-              </div>
+              </ScrollReveal>
               <div className="tech-journey__year-body">
                 <ul className="tech-journey__cards">
-                  {technologies.map(tech => (
-                    <li key={tech.id}>
+                  {technologies.map((tech, idx) => (
+                    <ScrollReveal
+                      as="li"
+                      key={tech.id}
+                      delay={0.04 * (idx % 4)}
+                      viewport={{ once: false, margin: '0px 0px -40px 0px' }}
+                      className="flex min-w-0 h-full"
+                    >
                       <TechCard tech={tech} onOpen={openDetails} effectsEnabled={effectsEnabled} />
-                    </li>
+                    </ScrollReveal>
                   ))}
                 </ul>
               </div>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
@@ -25,7 +25,7 @@ import {
   Layers,
 } from 'lucide-react';
 import heroPortraitImg from './assets/me/image_7ee6a3.jpg';
-import { profile, socialLinks, recognition, leadershipExperiences, academicAwards } from './content';
+import { profile, socialLinks, recognition, leadershipExperiences, academicAwards, techJourney } from './content';
 import {
   hackathonAndContestItems,
   portfolioAwards,
@@ -39,6 +39,7 @@ import LiveStatus from './LiveStatus';
 import AmbientBackground from './AmbientBackground';
 import AmbientEffectsToggle from './AmbientEffectsToggle';
 import AboutMeGallery from './AboutMeGallery';
+import TechJourney from './TechJourney';
 import TiltCard from './TiltCard';
 import { ScrollReveal } from './ScrollReveal';
 import './style.css';
@@ -131,17 +132,76 @@ function BrandRollingButton({ text, href, onClick, className = '', children, ...
   );
 }
 
-function Header({ theme, onThemeToggle, ambientEnabled, onAmbientToggle }) {
+function Header({
+  theme,
+  onThemeToggle,
+  ambientEnabled,
+  onAmbientToggle,
+  activeSection = 'about',
+  onNavigate,
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleRef = useRef(null);
+  const groupRef = useRef(null);
+  const itemRefs = useRef([]);
+  const [gliderStyle, setGliderStyle] = useState({ width: 0, offsetLeft: 0, ready: false });
+
   const links = [
-    { href: '#about', label: 'About' },
-    { href: '#work', label: 'Projects' },
-    { href: '#hackathons', label: 'Contests' },
-    { href: '#leadership', label: 'Leadership' },
-    { href: '#recognitions', label: 'Awards' },
-    { href: '#contact', label: 'Contact' },
+    { id: 'about', label: 'About' },
+    { id: 'work', label: 'Projects' },
+    { id: 'hackathons', label: 'Contests' },
+    { id: 'skills', label: 'Journey' },
+    { id: 'leadership', label: 'Leadership' },
+    { id: 'recognitions', label: 'Awards' },
+    { id: 'contact', label: 'Contact' },
   ];
+
+  const activeIndex = Math.max(
+    0,
+    links.findIndex(link => link.id === activeSection),
+  );
+
+  const handleLinkClick = (e, id) => {
+    e.preventDefault();
+    onNavigate?.(id);
+  };
+
+  useLayoutEffect(() => {
+    const updateGlider = () => {
+      const groupEl = groupRef.current;
+      const activeEl = itemRefs.current[activeIndex];
+      if (!groupEl || !activeEl) return;
+
+      const groupRect = groupEl.getBoundingClientRect();
+      const activeRect = activeEl.getBoundingClientRect();
+
+      if (activeRect.width === 0) return;
+
+      const activeWidth = Math.round(activeRect.width);
+      const activeOffsetLeft = Math.round(activeRect.left - groupRect.left);
+
+      setGliderStyle({
+        width: activeWidth,
+        offsetLeft: activeOffsetLeft,
+        ready: true,
+      });
+    };
+
+    updateGlider();
+    const rafId = requestAnimationFrame(updateGlider);
+    const timer = setTimeout(updateGlider, 50);
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(updateGlider).catch(() => {});
+    }
+
+    window.addEventListener('resize', updateGlider);
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(timer);
+      window.removeEventListener('resize', updateGlider);
+    };
+  }, [activeIndex]);
 
   useEffect(() => {
     if (!menuOpen) return undefined;
@@ -159,14 +219,45 @@ function Header({ theme, onThemeToggle, ambientEnabled, onAmbientToggle }) {
     <header className="header-wrap">
       <nav className="navigation glass" aria-label="Main navigation">
         <Brand />
-        <div className="nav-links">
-          {links.map(link => (
-            <a key={link.href} href={link.href}>
-              {link.label}
-            </a>
-          ))}
+        <div
+          ref={groupRef}
+          className="glass-radio-group"
+          role="tablist"
+          aria-label="Portfolio sections"
+        >
+          <div
+            className="glass-glider"
+            style={{
+              width: `${gliderStyle.width}px`,
+              transform: `translateX(${gliderStyle.offsetLeft}px)`,
+              opacity: gliderStyle.ready ? 1 : 0,
+            }}
+            aria-hidden="true"
+          />
+          {links.map((link, idx) => {
+            const isActive = activeIndex === idx;
+            return (
+              <a
+                key={link.id}
+                ref={el => {
+                  itemRefs.current[idx] = el;
+                }}
+                href={`#${link.id}`}
+                className={`glass-radio-item ${isActive ? 'is-active' : ''}`}
+                role="tab"
+                aria-selected={isActive}
+                onClick={e => handleLinkClick(e, link.id)}
+              >
+                {link.label}
+              </a>
+            );
+          })}
         </div>
-        <a className="nav-cta" href="#contact">
+        <a
+          className="nav-cta"
+          href="#contact"
+          onClick={e => handleLinkClick(e, 'contact')}
+        >
           Let’s connect <Arrow diagonal size={15} />
         </a>
         <div className="appearance-controls" role="group" aria-label="Appearance">
@@ -191,7 +282,14 @@ function Header({ theme, onThemeToggle, ambientEnabled, onAmbientToggle }) {
         hidden={!menuOpen}
       >
         {links.map(link => (
-          <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>
+          <a
+            key={link.id}
+            href={`#${link.id}`}
+            onClick={e => {
+              setMenuOpen(false);
+              handleLinkClick(e, link.id);
+            }}
+          >
             <span>{link.label}</span>
             <Arrow diagonal size={15} />
           </a>
@@ -324,23 +422,23 @@ function About({ effectsEnabled = true }) {
           <div className="about-content">
             <ScrollReveal delay={0.18}>
               <p className="about-bio-text">
-                I am Dirk Kenji Balili, a BSIT Student passionate about life and the things I enjoy. I am endlessly intrigued by building things and pushing the boundaries of what I can create.
+                I am Dirk Kenji Balili, a BSIT Student passionate about life and the things I enjoy. I am endlessly intrigued by building things and pushing the boundaries of what I can create. Outside of coding, I usually enjoy playing guitar, watching movies, and listening to music. Despite being naturally introverted, I want to expose myself to the outside world to see what I am capable of and contribute to things that matter. I truly enjoy building myself up and will keep trying, despite any obstacles, to succeed.
               </p>
             </ScrollReveal>
 
             {/* Fun Facts Sub-grid */}
             <ScrollReveal delay={0.3} className="fun-facts-grid">
               <div className="fun-fact-card">
-                <span className="text-[#D97757] font-bold">01.</span>
-                <span>[ Insert Fun Fact or Hobby Here ]</span>
+                <span className="text-[#D97757] font-bold shrink-0">01.</span>
+                <span>I enjoy playing guitar, gaming, watching movies, reading books, listening to music, and traveling.</span>
               </div>
               <div className="fun-fact-card">
-                <span className="text-[#D97757] font-bold">02.</span>
-                <span>[ Insert Favorite Tech/Tool Here ]</span>
+                <span className="text-[#D97757] font-bold shrink-0">02.</span>
+                <span>Currently enjoying Django, Python, and React. I&apos;m also actively exploring AI with Gemini, Astra, and GPT-3.</span>
               </div>
               <div className="fun-fact-card">
-                <span className="text-[#D97757] font-bold">03.</span>
-                <span>[ Insert Personal Quirk Here ]</span>
+                <span className="text-[#D97757] font-bold shrink-0">03.</span>
+                <span>I get cold easily (hence the jackets!), fall asleep fast but wake up just as quickly, and I&apos;m soft-spoken with a soft spot for others—including AI, so I always say &apos;please&apos; and &apos;thank you&apos;. I can get distracted, but I always find my way back into focus.</span>
               </div>
             </ScrollReveal>
 
@@ -512,6 +610,17 @@ function ProjectImage({
           alt={activeAlt}
           className={status === 'ready' ? 'is-ready' : ''}
           aria-hidden={status !== 'ready'}
+          style={
+            !overrideSrc
+              ? {
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                  borderTopLeftRadius: 'inherit',
+                  borderTopRightRadius: 'inherit',
+                }
+              : undefined
+          }
         />
       </div>
       {onOpen && status !== 'error' && (
@@ -1021,7 +1130,7 @@ function LeadershipSection({ items = leadershipExperiences }) {
       <div className="container">
         <div className="section-header">
           <ScrollReveal delay={0}>
-            <span className="section-micro-label">[ 04 ] // EXPERIENCE &amp; LEADERSHIP</span>
+            <span className="section-micro-label">[ 05 ] // EXPERIENCE &amp; LEADERSHIP</span>
             <h2 id="leadership-title" className="section-heading">
               Experience &amp; Leadership
             </h2>
@@ -1053,13 +1162,19 @@ function LeadershipSection({ items = leadershipExperiences }) {
                   <div className="leadership-card__meta-row">
                     {entry.orgLogo && (
                       <span className="leadership-card__logo-wrap" aria-hidden="true">
-                        <img src={entry.orgLogo} alt="" width="32" height="32" loading="lazy" />
+                        <img
+                          src={entry.orgLogo}
+                          alt={entry.organization || ''}
+                          width="48"
+                          height="48"
+                          loading="lazy"
+                        />
                       </span>
                     )}
                     <span className="leadership-card__badge">{entry.badge || entry.category}</span>
                     <span className="leadership-card__period">{entry.period}</span>
                   </div>
-                  <h2 className="leadership-card__role">{entry.role}</h2>
+                  <h3 className="leadership-card__role">{entry.role}</h3>
                   <h4 className="leadership-card__title">{entry.title}</h4>
                   <span className="leadership-card__org">{entry.organization}</span>
                 </div>
@@ -1095,7 +1210,7 @@ function RecognitionsSection({
       <div className="container">
         <div className="section-header">
           <ScrollReveal delay={0}>
-            <span className="section-micro-label">[ 05 ] // RECOGNITIONS</span>
+            <span className="section-micro-label">[ 06 ] // RECOGNITIONS</span>
             <h2 id="recognitions-title" className="section-heading">
               Awards &amp; Recognitions
             </h2>
@@ -1171,7 +1286,7 @@ function Contact() {
           <div className="contact-main">
             <div className="contact-intro">
               <ScrollReveal delay={0}>
-                <span className="section-micro-label">[ 06 ] // CONTACT</span>
+                <span className="section-micro-label">[ 07 ] // CONTACT</span>
                 <h2 id="contact-title">Contact</h2>
               </ScrollReveal>
               <ScrollReveal delay={0.12}>
@@ -1602,7 +1717,92 @@ function App() {
     });
   }, []);
 
-  const anyModalOpen = Boolean(selectedProject);
+  const [techModalOpen, setTechModalOpen] = useState(false);
+  const anyModalOpen = Boolean(selectedProject) || techModalOpen;
+
+  const [activeSection, setActiveSection] = useState(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const hashId = window.location.hash.replace('#', '');
+      const valid = ['about', 'work', 'hackathons', 'skills', 'leadership', 'recognitions', 'contact'];
+      if (valid.includes(hashId)) return hashId;
+    }
+    return 'about';
+  });
+  const isNavigatingRef = useRef(false);
+  const navigatingTimerRef = useRef(null);
+
+  useEffect(() => {
+    const sectionIds = [
+      'about',
+      'work',
+      'hackathons',
+      'skills',
+      'leadership',
+      'recognitions',
+      'contact',
+    ];
+    const sectionEls = sectionIds
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    if (sectionEls.length === 0) return undefined;
+
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (isNavigatingRef.current) return;
+      if (ticking) return;
+
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const scrollY = window.scrollY;
+        if (scrollY < 200) {
+          setActiveSection('about');
+          return;
+        }
+        if (window.innerHeight + scrollY >= document.documentElement.scrollHeight - 70) {
+          setActiveSection('contact');
+          return;
+        }
+
+        const headerLine = 160;
+        let matchedId = null;
+        for (const el of sectionEls) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= headerLine && rect.bottom > headerLine) {
+            matchedId = el.id;
+            break;
+          }
+        }
+        if (matchedId) {
+          setActiveSection(matchedId);
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const handleNavigate = useCallback(id => {
+    setActiveSection(id);
+    isNavigatingRef.current = true;
+    if (navigatingTimerRef.current) clearTimeout(navigatingTimerRef.current);
+    navigatingTimerRef.current = setTimeout(() => {
+      isNavigatingRef.current = false;
+    }, 900);
+
+    const target = document.getElementById(id);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.history.pushState(null, '', `#${id}`);
+    }
+  }, []);
 
   return (
     <>
@@ -1616,6 +1816,8 @@ function App() {
         onThemeToggle={toggleTheme}
         ambientEnabled={ambientEnabled}
         onAmbientToggle={toggleAmbient}
+        activeSection={activeSection}
+        onNavigate={handleNavigate}
       />
       <main id="main">
         <div id="top" />
@@ -1632,6 +1834,13 @@ function App() {
           motionEnabled={ambientEnabled}
           motionSuspended={anyModalOpen}
           onAnnounce={announce}
+        />
+        <TechJourney
+          items={techJourney}
+          projectItems={portfolioProjects}
+          effectsEnabled={ambientEnabled}
+          onModalChange={setTechModalOpen}
+          onSelectProject={openProject}
         />
         <LeadershipSection />
         <RecognitionsSection

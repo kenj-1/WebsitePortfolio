@@ -330,10 +330,12 @@ function scanLocalPortfolioAssets(rootDir) {
       if (IMAGE_EXTENSIONS.has(ext)) {
         const varName = registerImageImport(fullPath);
         const caption =
-          meIdx === 0
+          fileName.includes('image_7ee6e6')
             ? 'Dirk Kenji Balili · Student Builder & Creator'
-            : 'Innovation Cebu · Student Tech Community';
-        const objectPos = fileName.includes('image_7ee6e6') ? '50% 18%' : '50% 8%';
+            : fileName.includes('image_7ee6a3')
+              ? 'Student Developer · Fitting Room Mirror Selfie'
+              : 'Campus Life & Community Building';
+        const objectPos = fileName.includes('image_7ee6e6') ? '50% 18%' : '50% 20%';
         mePhotos.push(`{
           id: ${JSON.stringify(`me-photo-${meIdx + 1}`)},
           fileName: ${JSON.stringify(fileName)},
