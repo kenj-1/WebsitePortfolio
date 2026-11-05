@@ -77,6 +77,7 @@ export default function AboutMeGallery({
                     src={photo.src}
                     alt={photo.alt || `Photo of Dirk Kenji Balili (${index + 1})`}
                     className={`about-me-img ${loadedMap[photo.src] ? 'is-loaded' : ''}`}
+                    style={photo.objectPosition ? { objectPosition: photo.objectPosition } : undefined}
                     onLoad={() => setLoadedMap(prev => ({ ...prev, [photo.src]: true }))}
                     loading={index === 0 ? 'eager' : 'lazy'}
                   />
@@ -104,7 +105,7 @@ export default function AboutMeGallery({
               <div className="about-me-controls" role="group" aria-label="Photo navigation">
                 <button
                   type="button"
-                  className="about-me-btn"
+                  className="about-me-btn about-me-btn--prev"
                   onClick={handlePrev}
                   aria-label="Previous photo"
                   title="Previous photo (Left arrow)"
@@ -127,7 +128,7 @@ export default function AboutMeGallery({
 
                 <button
                   type="button"
-                  className="about-me-btn"
+                  className="about-me-btn about-me-btn--next"
                   onClick={handleNext}
                   aria-label="Next photo"
                   title="Next photo (Right arrow)"

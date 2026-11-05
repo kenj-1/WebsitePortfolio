@@ -10,6 +10,7 @@ import reactLogo from './assets/tech/react.webp';
 import sqlLogo from './assets/tech/sql.webp';
 import supabaseLogo from './assets/tech/supabase.webp';
 import springBootLogo from './assets/tech/spring-boot.png';
+import notionLogo from './assets/tech/notion.png';
 
 import awsOrgLogo from './assets/organizations/aws-wildquacc.jpeg';
 import cssOrgLogo from './assets/organizations/css.jpeg';
@@ -443,6 +444,22 @@ export const techJourney = [
       'Designed complex, highly functional Figma simulations driven by strict HCI principles for MedFinds.',
     ],
     relatedProjectIds: ['medfinds', 'empathtune-android'],
+  },
+  {
+    id: 'notion',
+    year: 2025,
+    name: 'Notion',
+    category: 'Productivity & Documentation',
+    logo: notionLogo,
+    summary: 'Documentation, sprint tracking, and project organization across academic and hackathon workflows.',
+    learningPoints: [
+      'Engineered structured knowledge bases, product documentation, and database schemas for software projects.',
+      'Organized sprint roadmaps, kanban pipelines, and design specs for hackathon builds.',
+    ],
+    applications: [
+      'Used for project planning, feature specifications, and team knowledge bases across software projects.',
+    ],
+    relatedProjectIds: ['medfinds', 'empathtune-web', 'nagaalaga-mobile'],
   },
   {
     id: 'python',

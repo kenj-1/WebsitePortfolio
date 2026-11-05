@@ -331,14 +331,16 @@ function scanLocalPortfolioAssets(rootDir) {
         const varName = registerImageImport(fullPath);
         const caption =
           meIdx === 0
-            ? 'Dirk Kenji Balili · CIT–U Student Developer'
-            : 'Campus Life & Community Building';
+            ? 'Dirk Kenji Balili · Student Builder & Creator'
+            : 'Innovation Cebu · Student Tech Community';
+        const objectPos = fileName.includes('image_7ee6e6') ? '50% 18%' : '50% 8%';
         mePhotos.push(`{
           id: ${JSON.stringify(`me-photo-${meIdx + 1}`)},
           fileName: ${JSON.stringify(fileName)},
           src: ${varName},
           alt: ${JSON.stringify(`Dirk Kenji Balili photo ${meIdx + 1}`)},
           caption: ${JSON.stringify(caption)},
+          objectPosition: ${JSON.stringify(objectPos)},
           sourcePath: ${JSON.stringify(`assets/me/${fileName}`)}
         }`);
         meIdx++;

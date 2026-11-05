@@ -21,7 +21,10 @@ import {
   Download,
   Github,
   ExternalLink,
+  Sparkles,
+  Layers,
 } from 'lucide-react';
+import heroPortraitImg from './assets/me/image_7ee6a3.jpg';
 import { profile, socialLinks, recognition, leadershipExperiences, academicAwards } from './content';
 import {
   hackathonAndContestItems,
@@ -37,7 +40,6 @@ import AmbientBackground from './AmbientBackground';
 import AmbientEffectsToggle from './AmbientEffectsToggle';
 import AboutMeGallery from './AboutMeGallery';
 import TiltCard from './TiltCard';
-import LiquidLogo3D from './LiquidLogo3D';
 import { ScrollReveal } from './ScrollReveal';
 import './style.css';
 
@@ -99,15 +101,45 @@ function Brand() {
   );
 }
 
+function BrandRollingButton({ text, href, onClick, className = '', children, ...props }) {
+  const label = text || children;
+  const content = (
+    <div className="relative overflow-hidden h-[24px]">
+      <p className="brand-roll-text group-hover:-translate-y-7 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] transition-transform whitespace-nowrap">
+        {label}
+      </p>
+      <p className="brand-roll-text absolute top-7 left-0 group-hover:top-0 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] transition-all whitespace-nowrap">
+        {label}
+      </p>
+    </div>
+  );
+
+  const buttonClasses = `cursor-pointer bg-gradient-to-b from-[#D97757] to-[#b35b3f] shadow-[0px_4px_32px_0_rgba(217,119,87,0.4)] px-6 py-3 rounded-xl border-[1px] border-slate-500/30 text-white font-medium group inline-flex items-center justify-center no-underline transition-all duration-300 hover:shadow-[0px_6px_36px_0_rgba(217,119,87,0.6)] active:scale-95 ${className}`;
+
+  if (href) {
+    return (
+      <a href={href} className={buttonClasses} {...props}>
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <button type="button" onClick={onClick} className={buttonClasses} {...props}>
+      {content}
+    </button>
+  );
+}
+
 function Header({ theme, onThemeToggle, ambientEnabled, onAmbientToggle }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleRef = useRef(null);
   const links = [
+    { href: '#about', label: 'About' },
     { href: '#work', label: 'Projects' },
     { href: '#hackathons', label: 'Contests' },
     { href: '#leadership', label: 'Leadership' },
     { href: '#recognitions', label: 'Awards' },
-    { href: '#about', label: 'About' },
     { href: '#contact', label: 'Contact' },
   ];
 
@@ -169,64 +201,108 @@ function Header({ theme, onThemeToggle, ambientEnabled, onAmbientToggle }) {
   );
 }
 
-function Hero({ theme, effectsEnabled = true, modalOpen = false }) {
+function Hero() {
   return (
-    <section className="hero-section hero-eclipse" aria-labelledby="hero-title">
-      {/* The Glowing Arc */}
+    <section className="hero-section hero-asym" aria-labelledby="hero-title">
+      {/* The Softened Glowing Arc / Backdrop */}
       <div className="hero-eclipse-arc" aria-hidden="true" />
 
-      <div className="hero-eclipse-inner container">
-        <ScrollReveal delay={0}>
-          <p className="internship-note">
-            <span className="status-dot" aria-hidden="true" />
-            <span>Open to internship opportunities</span>
-          </p>
-        </ScrollReveal>
+      <div className="container hero-asym-container">
+        {/* Left Column: Typography, Subtitle, CTA Buttons, Metrics */}
+        <div className="hero-left-col">
+          <ScrollReveal delay={0}>
+            <p className="hero-producer-label hero-producer-label--left">
+              <span className="status-dot" aria-hidden="true" />
+              <span>A Kenji Balili Production</span>
+            </p>
+          </ScrollReveal>
 
-        {/* Main Title in Citadel Architectural Display Font */}
-        <ScrollReveal delay={0.12}>
-          <h1 id="hero-title" className="hero-headline-eclipse">
-            KENJI<br />BALILI
-          </h1>
-        </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <h1 id="hero-title" className="hero-headline-asym">
+              Website Portfolio
+            </h1>
+          </ScrollReveal>
 
-        {/* Core Role & Soft Light Editorial Accent */}
-        <ScrollReveal delay={0.2}>
-          <div className="hero-role-display">
-            <span className="hero-core-role">SOFTWARE DEVELOPER &amp; PRODUCT BUILDER</span>
-            <span className="hero-accent-text">Crafting intelligent interfaces &amp; scalable digital systems</span>
-          </div>
-        </ScrollReveal>
+          <ScrollReveal delay={0.18}>
+            <p className="hero-subtitle-asym">
+              Crafting captivating digital experiences through engineering and design. Software developer &amp; product builder specializing in intelligent interfaces and scalable architectures.
+            </p>
+          </ScrollReveal>
 
-        {/* High-Contrast Resume CTA Button directly above 3D Logo */}
-        <ScrollReveal delay={0.28}>
-          <div className="hero-resume-wrap">
-            <a
-              href="/Kenji_Resume.pdf"
-              download="Kenji_Resume.pdf"
-              className="hero-resume-btn"
-              aria-label="Download Kenji Balili Resume (PDF)"
-            >
-              <Download size={15} aria-hidden="true" className="hero-resume-icon" />
-              <span>Download Resume</span>
+          <ScrollReveal delay={0.26} className="hero-actions-left">
+            <BrandRollingButton
+              href="#work"
+              text={
+                <span className="inline-flex items-center gap-2">
+                  View Projects <Arrow diagonal size={16} />
+                </span>
+              }
+            />
+            <a className="button button-secondary hero-secondary-btn" href="#hackathons">
+              Contests <Arrow diagonal size={15} />
             </a>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
 
-        {/* Interactive 3D Liquid Logo Component centered inside glowing arc */}
-        <ScrollReveal delay={0.34} className="hero-liquid-logo-wrap">
-          <LiquidLogo3D effectsEnabled={effectsEnabled} suspended={modalOpen} />
-        </ScrollReveal>
+          {/* Metrics Row matching reference */}
+          <ScrollReveal delay={0.34} className="hero-metrics-row">
+            <div className="hero-metric-item">
+              <span className="hero-metric-val">15+</span>
+              <span className="hero-metric-label">Projects Built</span>
+            </div>
+            <div className="hero-metric-divider" aria-hidden="true" />
+            <div className="hero-metric-item">
+              <span className="hero-metric-val">3+</span>
+              <span className="hero-metric-label">Hackathons</span>
+            </div>
+            <div className="hero-metric-divider" aria-hidden="true" />
+            <div className="hero-metric-item">
+              <span className="hero-metric-val">1.15</span>
+              <span className="hero-metric-label">CIT–U GPA</span>
+            </div>
+          </ScrollReveal>
+        </div>
 
-        {/* Action Buttons */}
-        <ScrollReveal delay={0.42} className="hero-actions hero-actions-centered">
-          <a className="button button-primary" href="#work">
-            View Projects <Arrow diagonal size={16} />
-          </a>
-          <a className="button button-secondary" href="#hackathons">
-            Contests <Arrow diagonal size={15} />
-          </a>
-        </ScrollReveal>
+        {/* Right Column: The Portrait Focus with Floating Badges */}
+        <div className="hero-right-col">
+          <ScrollReveal delay={0.22} className="hero-portrait-stage">
+            {/* Orbital Rings & Aura Accent */}
+            <div className="hero-orbit-ring hero-orbit-ring--outer" aria-hidden="true" />
+            <div className="hero-orbit-ring hero-orbit-ring--inner" aria-hidden="true" />
+            <div className="hero-portrait-glow" aria-hidden="true" />
+
+            {/* Floating Badges */}
+            <div className="hero-floating-pill hero-floating-pill--top-left">
+              <span className="hero-pill-icon hero-pill-icon--cyan">
+                <Sparkles size={14} />
+              </span>
+              <span className="hero-pill-text">React &amp; UI/UX</span>
+            </div>
+
+            <div className="hero-floating-pill hero-floating-pill--middle-right">
+              <span className="hero-pill-icon hero-pill-icon--amber">
+                <Terminal size={14} />
+              </span>
+              <span className="hero-pill-text">Python &amp; Systems</span>
+            </div>
+
+            <div className="hero-floating-pill hero-floating-pill--bottom-left">
+              <span className="hero-pill-icon hero-pill-icon--purple">
+                <Layers size={14} />
+              </span>
+              <span className="hero-pill-text">Product Design</span>
+            </div>
+
+            {/* Main Floating Portrait Frame */}
+            <div className="hero-portrait-frame">
+              <img
+                src={heroPortraitImg}
+                alt="Dirk Kenji Balili mirror portrait"
+                className="hero-portrait-img"
+                loading="eager"
+              />
+            </div>
+          </ScrollReveal>
+        </div>
       </div>
     </section>
   );
@@ -239,33 +315,45 @@ function About({ effectsEnabled = true }) {
         <div className="about-bio">
           <div className="section-header about-header">
             <ScrollReveal delay={0}>
+              <span className="section-micro-label">[ 01 ] // ABOUT</span>
               <h2 id="about-title" className="section-heading">
                 About Me
               </h2>
             </ScrollReveal>
           </div>
           <div className="about-content">
-            {/* Delay 3: Paragraph Text / Description (0.3s delay) */}
-            <ScrollReveal delay={0.3}>
-              <p className="about-lead">
-                I’m an Information Technology student at Cebu Institute of Technology – University (CIT–U),
-                focusing on software architecture, rapid-prototyped systems, and accessible interfaces.
+            <ScrollReveal delay={0.18}>
+              <p className="about-bio-text">
+                I am Dirk Kenji Balili, a BSIT Student passionate about life and the things I enjoy. I am endlessly intrigued by building things and pushing the boundaries of what I can create.
               </p>
-              <p className="about-subtext">
-                Alongside leading technical projects and hackathon teams, I serve across student engineering
-                organizations and explore creative computing, photography, and music.
-              </p>
-              <div className="about-highlights">
-                <span className="about-chip">CIT–U Academic Achiever</span>
-                <span className="about-chip">Dean’s Lister 2025–2026</span>
-                <span className="about-chip">Hackathon Builder</span>
+            </ScrollReveal>
+
+            {/* Fun Facts Sub-grid */}
+            <ScrollReveal delay={0.3} className="fun-facts-grid">
+              <div className="fun-fact-card">
+                <span className="text-[#D97757] font-bold">01.</span>
+                <span>[ Insert Fun Fact or Hobby Here ]</span>
               </div>
+              <div className="fun-fact-card">
+                <span className="text-[#D97757] font-bold">02.</span>
+                <span>[ Insert Favorite Tech/Tool Here ]</span>
+              </div>
+              <div className="fun-fact-card">
+                <span className="text-[#D97757] font-bold">03.</span>
+                <span>[ Insert Personal Quirk Here ]</span>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.4} className="about-highlights">
+              <span className="about-chip">CIT–U Academic Achiever</span>
+              <span className="about-chip">Dean’s Lister 2025–2026</span>
+              <span className="about-chip">Hackathon Builder</span>
             </ScrollReveal>
           </div>
         </div>
 
-        {/* Delay 4: Interactive Photo Slider / Gallery (0.45s delay) */}
-        <ScrollReveal delay={0.45} className="about-gallery-wrap">
+        {/* Interactive Photo Slider / Gallery */}
+        <ScrollReveal delay={0.3} className="about-gallery-wrap">
           <AboutMeGallery effectsEnabled={effectsEnabled} />
         </ScrollReveal>
       </div>
@@ -829,6 +917,7 @@ function Projects({ items = portfolioProjects, onOpen, motionEnabled, motionSusp
       <div className="container">
         <div className="section-header">
           <ScrollReveal delay={0}>
+            <span className="section-micro-label">[ 02 ] // SHOWCASE</span>
             <h2 id="work-title" className="section-heading">
               Selected Projects
             </h2>
@@ -882,6 +971,7 @@ function HackathonsSection({
         <div className="hackathons-header-row">
           <div className="section-header">
             <ScrollReveal delay={0}>
+              <span className="section-micro-label">[ 03 ] // CONTESTS</span>
               <h2 id="hackathons-title" className="section-heading">
                 Hackathons &amp; Competitions
               </h2>
@@ -1005,7 +1095,7 @@ function RecognitionsSection({
       <div className="container">
         <div className="section-header">
           <ScrollReveal delay={0}>
-            <span className="section-micro-label">[ 05 ] // AWARDS</span>
+            <span className="section-micro-label">[ 05 ] // RECOGNITIONS</span>
             <h2 id="recognitions-title" className="section-heading">
               Awards &amp; Recognitions
             </h2>
@@ -1081,6 +1171,7 @@ function Contact() {
           <div className="contact-main">
             <div className="contact-intro">
               <ScrollReveal delay={0}>
+                <span className="section-micro-label">[ 06 ] // CONTACT</span>
                 <h2 id="contact-title">Contact</h2>
               </ScrollReveal>
               <ScrollReveal delay={0.12}>
@@ -1088,9 +1179,14 @@ function Contact() {
                   Available for software engineering internships, technical collaborations, and student community initiatives.
                 </p>
                 <div className="contact-actions">
-                  <a className="button button-primary" href={`mailto:${profile.email}`}>
-                    Email me <Arrow diagonal size={16} />
-                  </a>
+                  <BrandRollingButton
+                    href={`mailto:${profile.email}`}
+                    text={
+                      <span className="inline-flex items-center gap-2">
+                        Email me <Arrow diagonal size={16} />
+                      </span>
+                    }
+                  />
                   <a
                     className="button button-secondary"
                     href={profile.telegramUrl}
@@ -1100,15 +1196,17 @@ function Contact() {
                     Telegram <Arrow diagonal size={15} />
                   </a>
                   <a
-                    className="button button-resume contact-resume-btn"
-                    href="/Kenji_Resume.pdf"
+                    className="resume-download-btn"
+                    href="/assets/Kenji_Resume.pdf"
                     download="Kenji_Resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Download Kenji's Resume (PDF)"
                   >
-                    <Download size={15} aria-hidden="true" />
                     <span>Download Resume</span>
+                    <svg viewBox="0 0 256 256" height="32" width="38" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M74.34 85.66a8 8 0 0 1 11.32-11.32L120 108.69V24a8 8 0 0 1 16 0v84.69l34.34-34.35a8 8 0 0 1 11.32 11.32l-48 48a8 8 0 0 1-11.32 0ZM240 136v64a16 16 0 0 1-16 16H32a16 16 0 0 1-16-16v-64a16 16 0 0 1 16-16h52.4a4 4 0 0 1 2.83 1.17L111 145a24 24 0 0 0 34 0l23.8-23.8a4 4 0 0 1 2.8-1.2H224a16 16 0 0 1 16 16m-40 32a12 12 0 1 0-12 12a12 12 0 0 0 12-12" fill="currentColor"></path>
+                    </svg>
                   </a>
                 </div>
               </ScrollReveal>
@@ -1522,6 +1620,7 @@ function App() {
       <main id="main">
         <div id="top" />
         <Hero theme={theme} effectsEnabled={ambientEnabled} modalOpen={anyModalOpen} />
+        <About effectsEnabled={ambientEnabled} />
         <Projects
           onOpen={openProject}
           motionEnabled={ambientEnabled}
@@ -1541,7 +1640,6 @@ function App() {
           motionSuspended={anyModalOpen}
           onAnnounce={announce}
         />
-        <About effectsEnabled={ambientEnabled} />
         <EducationRecognition />
         <Contact />
       </main>
